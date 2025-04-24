@@ -197,8 +197,8 @@ footer {
 
 .language-switcher {
   position: absolute; /* Ensure it moves relative to <body> */
-  top: 140px; /* Adjust vertical positioning */
-  right: 100px; /* Adjust horizontal positioning */
+  top: 90px; /* Adjust vertical positioning */
+  right: 450px; /* Adjust horizontal positioning */
   display: flex;
   gap: 8px; /* Adjust spacing between flags */
   align-items: center;
@@ -266,12 +266,7 @@ footer {
     width: 100%;
   }
   .language-switcher {
-    position: relative; 
-    top: 50%; /* Adjust vertical positioning */
-    right: 25%; /* Adjust horizontal positioning */
-    display: flex;
     gap: 10px; /* Adjust spacing between flags */
-    align-items: center;
     box-shadow: 20px 20px 20px rgba(208, 63, 63, 0.5);
 }
 
