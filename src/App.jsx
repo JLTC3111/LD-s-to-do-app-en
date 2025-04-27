@@ -15,7 +15,7 @@ function App() {
   const [todos, setTodos] = useState([
     { input: 'Hello! Add your first todo!', complete: true }
   ])
-  const [selectedTab, setSelectedTab] = useState('Open')
+  const [selectedTab, setSelectedTab] = useState('All')
 
 
   function handleAddTodo(newTodo) {
@@ -25,13 +25,12 @@ function App() {
   }
 
   function handleCompleteTodo(index) {
-    // update/edit/modify
-    let newTodoList = [...todos]
-    let completedTodo = todos[index]
-    completedTodo['complete'] = true
-    newTodoList[index] = completedTodo
-    setTodos(newTodoList)
-    handleSaveData(newTodoList)
+    let newTodoList = [...todos];
+    let completedTodo = { ...newTodoList[index] }; // create a copy
+    completedTodo.complete = true; // ✅ correct property
+    newTodoList[index] = completedTodo;
+    setTodos(newTodoList);
+    handleSaveData(newTodoList);
   }
 
   function handleDeleteTodo(index) {

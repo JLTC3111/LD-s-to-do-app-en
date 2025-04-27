@@ -3,6 +3,7 @@ import { useState } from "react";
 export function TodoInput(props) {
   const { handleAddTodo } = props;
   const [inputValue, setInputValue] = useState('');
+  
 
   function submitInput() {
     if (!inputValue.trim()) return;

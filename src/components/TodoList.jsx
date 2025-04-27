@@ -11,6 +11,7 @@ export function TodoList(props) {
     handleCompleteTodo,
   } = props;
 
+  // Dynamically filter todos based on tab
   const filteredTodos =
     selectedTab === 'All'
       ? todos
@@ -21,19 +22,41 @@ export function TodoList(props) {
   const onDragEnd = (result) => {
     if (!result.destination) return;
 
-    const newTodos = [...todos];
-    const [movedItem] = newTodos.splice(result.source.index, 1);
-    newTodos.splice(result.destination.index, 0, movedItem);
+    const sourceIndex = result.source.index;
+    const destIndex = result.destination.index;
 
-    setTodos(newTodos);
-    localStorage.setItem('todo-app', JSON.stringify({ todos: newTodos }));
+    const updatedFilteredTodos = [...filteredTodos];
+    const [movedItem] = updatedFilteredTodos.splice(sourceIndex, 1);
+    updatedFilteredTodos.splice(destIndex, 0, movedItem);
+
+    // Map back to full todos
+    if (selectedTab === 'All') {
+      setTodos(updatedFilteredTodos);
+      handleSaveData(updatedFilteredTodos);
+    } else {
+      const newTodos = [...todos];
+      // Reinsert updated filtered list into correct spots in original todos
+      let filterFn = selectedTab === 'Completed' ? t => t.complete : t => !t.complete;
+      let filteredIdx = 0;
+      for (let i = 0; i < newTodos.length; i++) {
+        if (filterFn(newTodos[i])) {
+          newTodos[i] = updatedFilteredTodos[filteredIdx++];
+        }
+      }
+      setTodos(newTodos);
+      handleSaveData(newTodos);
+    }
   };
+
+  function handleSaveData(currTodos) {
+    localStorage.setItem('todo-app', JSON.stringify({ todos: currTodos }))
+  }
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="todo-list">
         {(provided) => (
-          <div {...provided.droppableProps} ref={provided.innerRef}>
+          <div className="todo-List" {...provided.droppableProps} ref={provided.innerRef}>
             {filteredTodos.map((todo, index) => (
               <Draggable key={index} draggableId={String(index)} index={index}>
                 {(provided) => (
@@ -44,7 +67,7 @@ export function TodoList(props) {
                   >
                     <TodoCard
                       todo={todo}
-                      todoIndex={index}
+                      todoIndex={todos.indexOf(todo)}
                       handleEditTodo={handleEditTodo}
                       handleDeleteTodo={handleDeleteTodo}
                       handleCompleteTodo={handleCompleteTodo}
