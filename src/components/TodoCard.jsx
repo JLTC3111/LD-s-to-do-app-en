@@ -12,12 +12,35 @@ export function TodoCard(props) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState(todo.input);
 
+  function saveEdit() {
+    if (!editedText.trim()) return;
+    handleEditTodo(todoIndex, editedText);
+    setIsEditing(false);
+  }
+
+  function cancelEdit() {
+    setEditedText(todo.input);
+    setIsEditing(false);
+  }
+
+  function handleKeyDown(e) {
+    if (e.key === 'Enter') {
+      saveEdit();
+    }
+    if (e.key === 'Escape') {
+      cancelEdit();
+    }
+  }
+
   return (
     <div className="card todo-item">
       {isEditing ? (
         <input
           value={editedText}
           onChange={(e) => setEditedText(e.target.value)}
+          onKeyDown={handleKeyDown} // press Enter to save, Esc to cancel
+          onBlur={saveEdit}          // click outside to save
+          autoFocus
         />
       ) : (
         <p>{todo.input}</p>
@@ -26,16 +49,10 @@ export function TodoCard(props) {
       <div className="todo-buttons">
         {isEditing ? (
           <>
-            <button
-              onClick={() => {
-                if (!editedText.trim()) return;
-                handleEditTodo(todoIndex, editedText);
-                setIsEditing(false);
-              }}
-            >
+            <button onClick={saveEdit}>
               <h6>Save</h6>
             </button>
-            <button onClick={() => setIsEditing(false)}>
+            <button onClick={cancelEdit}>
               <h6>Cancel</h6>
             </button>
           </>
