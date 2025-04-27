@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react';
+import gsap from 'gsap';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import { TodoCard } from "./TodoCard";
 
@@ -11,13 +13,30 @@ export function TodoList(props) {
     handleCompleteTodo,
   } = props;
 
-  // Dynamically filter todos based on tab
+  const listRef = useRef(null);
+
   const filteredTodos =
     selectedTab === 'All'
       ? todos
       : selectedTab === 'Completed'
       ? todos.filter((val) => val.complete)
       : todos.filter((val) => !val.complete);
+
+  useEffect(() => {
+    if (listRef.current) {
+      gsap.fromTo(
+        listRef.current.children,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: 'power2.out'
+        }
+      );
+    }
+  }, [filteredTodos.length]);
 
   const onDragEnd = (result) => {
     if (!result.destination) return;
@@ -29,13 +48,11 @@ export function TodoList(props) {
     const [movedItem] = updatedFilteredTodos.splice(sourceIndex, 1);
     updatedFilteredTodos.splice(destIndex, 0, movedItem);
 
-    // Map back to full todos
     if (selectedTab === 'All') {
       setTodos(updatedFilteredTodos);
       handleSaveData(updatedFilteredTodos);
     } else {
       const newTodos = [...todos];
-      // Reinsert updated filtered list into correct spots in original todos
       let filterFn = selectedTab === 'Completed' ? t => t.complete : t => !t.complete;
       let filteredIdx = 0;
       for (let i = 0; i < newTodos.length; i++) {
@@ -56,7 +73,10 @@ export function TodoList(props) {
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="todo-list">
         {(provided) => (
-          <div className="todo-List" {...provided.droppableProps} ref={provided.innerRef}>
+          <div className="todo-List" {...provided.droppableProps} ref={(el) => {
+            provided.innerRef(el);
+            listRef.current = el;
+          }}>
             {filteredTodos.map((todo, index) => (
               <Draggable key={index} draggableId={String(index)} index={index}>
                 {(provided) => (

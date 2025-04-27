@@ -2,8 +2,7 @@ import { Header } from "./components/Header"
 import { Tabs } from "./components/Tabs"
 import { TodoInput } from "./components/TodoInput"
 import { TodoList } from "./components/TodoList"
-import { useState, useEffect } from 'react'
-
+import { useState, useEffect } from 'react' 
 
 function App() {
   // const todos = [
@@ -16,7 +15,6 @@ function App() {
     { input: 'Hello! Add your first todo!', complete: true }
   ])
   const [selectedTab, setSelectedTab] = useState('All')
-
 
   function handleAddTodo(newTodo) {
     const newTodoList = [...todos, { input: newTodo, complete: false }]
@@ -63,6 +61,7 @@ function App() {
   }, []);
       
   
+
   return (
 
     <>
@@ -83,7 +82,7 @@ function App() {
       </div>
 
      <div className="app-container">
-        <video className="video-bg" autoPlay muted playsInline>
+        <video className="video-bg" autoPlay loop muted playsInline>
         <source src="/bg-video.mp4" type="video/mp4" />
         </video>
       </div>

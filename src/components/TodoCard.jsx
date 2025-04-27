@@ -55,7 +55,7 @@ export function TodoCard(props) {
   };
 
   return (
-    <div className="card todo-item" ref={cardRef}>
+    <div className={`card todo-item ${todo.complete ? 'completed-task' : ''}`}>
       {isEditing ? (
         <input
           value={editedText}

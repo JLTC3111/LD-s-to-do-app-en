@@ -215,6 +215,14 @@ footer {
 .flag-link:hover {
   transform: scale(1.5);
 }
+
+.completed-task {
+  background-color: #d4edda; /* light green */
+  text-decoration: line-through;
+  opacity: 0.8;
+}
+
+
 @media (min-width:640px) {
   .tab-button {
     padding: 0.5rem 1.5rem;
