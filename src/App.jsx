@@ -27,6 +27,10 @@ function App() {
     ];
     setTodos(newTodoList);
     handleSaveData(newTodoList);
+
+    if (selectedTab === 'All' || 'Completed') {
+      setSelectedTab('Incomplete');
+    }
   }
 
   function handleCompleteTodo(id) {

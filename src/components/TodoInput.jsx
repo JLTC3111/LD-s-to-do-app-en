@@ -7,6 +7,7 @@ export function TodoInput(props) {
 
   function submitInput() {
     if (!inputValue.trim()) return;
+    
     handleAddTodo(inputValue.trim());
     setInputValue('');
   }
@@ -25,7 +26,7 @@ export function TodoInput(props) {
       <input
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
-        onKeyDown={handleKeyDown}
+        onKeyUpCapture={handleKeyDown}
         placeholder="Add Task"
       />
       <button onClick={submitInput}>
