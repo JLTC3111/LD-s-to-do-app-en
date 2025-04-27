@@ -91,7 +91,7 @@ function App() {
       
       
       <div class="language-switcher">
-         <a href="https://icuestodoapp.netlify.app/" class="flag-link">
+         <a href="https://reminder4LD.netlify.app/" class="flag-link">
            <span class="flag-icon flag-icon-gb"></span> </a>
         <a href="https://remindericuevn.netlify.app/" class="flag-link">
            <span class="flag-icon flag-icon-vn"></span> </a>

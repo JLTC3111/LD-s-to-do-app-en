@@ -222,6 +222,9 @@ footer {
   opacity: 0.8;
 }
 
+.cursor-symbol {
+  cursor: url('/cursors/green_pencil.cur'), auto;
+}
 
 @media (min-width:640px) {
   .tab-button {
