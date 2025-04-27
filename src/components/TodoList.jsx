@@ -78,24 +78,24 @@ export function TodoList(props) {
             listRef.current = el;
           }}>
             {filteredTodos.map((todo, index) => (
-              <Draggable key={index} draggableId={String(index)} index={index}>
-                {(provided) => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                  >
-                    <TodoCard
-                      todo={todo}
-                      todoIndex={todos.indexOf(todo)}
-                      handleEditTodo={handleEditTodo}
-                      handleDeleteTodo={handleDeleteTodo}
-                      handleCompleteTodo={handleCompleteTodo}
-                    />
-                  </div>
-                )}
-              </Draggable>
-            ))}
+  <Draggable key={todo.id} draggableId={String(todo.id)} index={index}>
+    {(provided) => (
+      <div
+        ref={provided.innerRef}
+        {...provided.draggableProps}
+        {...provided.dragHandleProps}
+      >
+        <TodoCard
+          todo={todo}
+          todoId={todo.id} 
+          handleEditTodo={handleEditTodo}
+          handleDeleteTodo={handleDeleteTodo}
+          handleCompleteTodo={handleCompleteTodo}
+        />
+      </div>
+    )}
+  </Draggable>
+))}
             {provided.placeholder}
           </div>
         )}

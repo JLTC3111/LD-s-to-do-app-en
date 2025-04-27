@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
 
 export function TodoCard(props) {
-  const { todo, handleDeleteTodo, todoIndex, handleCompleteTodo, handleEditTodo } = props;
+  const { todo, todoId, handleDeleteTodo, handleCompleteTodo, handleEditTodo } = props;
   const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState(todo.input);
 
@@ -14,7 +14,7 @@ export function TodoCard(props) {
 
   function saveEdit() {
     if (!editedText.trim()) return;
-    handleEditTodo(todoIndex, editedText);
+    handleEditTodo(todoId, editedText);
     setIsEditing(false);
   }
 
@@ -34,7 +34,7 @@ export function TodoCard(props) {
       y: 30,
       duration: 0.4,
       ease: "power2.in",
-      onComplete: () => handleDeleteTodo(todoIndex),
+      onComplete: () => handleDeleteTodo(todoId),
     });
   }
 
@@ -43,7 +43,15 @@ export function TodoCard(props) {
       duration: 0.5,
       ease: "power1.out"
     });
-    handleCompleteTodo(todoIndex);
+    handleCompleteTodo(todoId);
+  }
+
+  function handleEdit() {
+    gsap.to(cardRef.current, {
+      duration: 0.5,
+      ease: "power1.out"
+    });
+    handleEditTodo(todoId);
   }
 
   const handleButtonHover = (e) => {
@@ -82,30 +90,20 @@ export function TodoCard(props) {
           </>
         ) : (
           <>
-            <button
-              onClick={handleComplete}
-              disabled={todo.complete}
-              onMouseEnter={handleButtonHover}
-              onMouseLeave={handleButtonLeave}
-            >
-              <h6>Done</h6>
+          
+            
+            <button onClick={() => handleComplete(todoId)} disabled={todo.complete} onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave} >
+            <h6>Done</h6></button>
+              
+            <button className="delete-button" onClick={() => handleDelete(todoId)} onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave}>
+            <h6>Delete</h6>
             </button>
-            <button
-              className="delete-button"
-              onClick={handleDelete}
-              onMouseEnter={handleButtonHover}
-              onMouseLeave={handleButtonLeave}
-            >
-              <h6>Delete</h6>
-            </button>
-            <button
-              onClick={() => setIsEditing(true)}
-              disabled={todo.complete}
-              onMouseEnter={handleButtonHover}
-              onMouseLeave={handleButtonLeave}
-            >
+
+            <button onClick={() => setIsEditing(true)} disabled={todo.complete} onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave}>
               <h6>Edit</h6>
             </button>
+             
+              
           </>
         )}
       </div>

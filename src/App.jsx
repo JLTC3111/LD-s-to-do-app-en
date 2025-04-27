@@ -17,33 +17,38 @@ function App() {
   const [selectedTab, setSelectedTab] = useState('All')
 
   function handleAddTodo(newTodo) {
-    const newTodoList = [...todos, { input: newTodo, complete: false }]
-    setTodos(newTodoList)
-    handleSaveData(newTodoList)
-  }
-
-  function handleCompleteTodo(index) {
-    let newTodoList = [...todos];
-    let completedTodo = { ...newTodoList[index] }; // create a copy
-    completedTodo.complete = true; // ✅ correct property
-    newTodoList[index] = completedTodo;
+    const newTodoList = [
+      ...todos,
+      {
+        id: Date.now() + Math.random(), // ← add ID when creating
+        input: newTodo,
+        complete: false
+      }
+    ];
     setTodos(newTodoList);
     handleSaveData(newTodoList);
   }
 
-  function handleDeleteTodo(index) {
-    let newTodoList = todos.filter((val, valIndex) => {
-      return valIndex !== index
-    })
-    setTodos(newTodoList)
-    handleSaveData(newTodoList)
+  function handleCompleteTodo(id) {
+    const newTodoList = todos.map(todo =>
+      todo.id === id ? { ...todo, complete: true } : todo
+    );
+    setTodos(newTodoList);
+    handleSaveData(newTodoList);
   }
-
-  function handleEditTodo(index, newText) {
-    const updatedTodos = [...todos];
-    updatedTodos[index].input = newText;
-    setTodos(updatedTodos);
-    handleSaveData(updatedTodos);
+  
+  function handleDeleteTodo(id) {
+    const newTodoList = todos.filter(todo => todo.id !== id);
+    setTodos(newTodoList);
+    handleSaveData(newTodoList);
+  }
+  
+  function handleEditTodo(id, newText) {
+    const newTodoList = todos.map(todo =>
+      todo.id === id ? { ...todo, input: newText } : todo
+    );
+    setTodos(newTodoList);
+    handleSaveData(newTodoList);
   }
 
   function handleSaveData(currTodos) {
@@ -51,10 +56,17 @@ function App() {
   }
 
   useEffect(() => {
-    if (!localStorage || !localStorage.getItem('todo-app')) { return }
-    let db = JSON.parse(localStorage.getItem('todo-app'))
-    setTodos(db.todos)
-  }, [])
+    if (!localStorage || !localStorage.getItem('todo-app')) return;
+  
+    let db = JSON.parse(localStorage.getItem('todo-app'));
+    
+    const loadedTodos = db.todos.map(todo => ({
+      ...todo,
+      id: todo.id || Date.now() + Math.random() // assign ID if missing
+    }));
+  
+    setTodos(loadedTodos);
+  }, []);
 
   useEffect(() => {
     document.title = "Reminder4LD"; // Change this to your desired title
