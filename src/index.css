@@ -81,9 +81,9 @@ hr {
 }
 
 .todo-buttons {
+  position: relative;
   display: flex;
   gap: 1rem;
-  position: relative;
   z-index: 5;
   margin-bottom: 5px;
 }
