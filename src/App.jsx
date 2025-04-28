@@ -83,19 +83,23 @@ function App() {
 
     <TodoInput handleAddTodo={handleAddTodo} />
       
-      
-      <div class="language-switcher">
-         <a href="https://reminder4LD.netlify.app/" class="flag-link">
-           <span class="flag-icon flag-icon-gb"></span> </a>
-        <a href="https://remindericuevn.netlify.app/" class="flag-link">
-           <span class="flag-icon flag-icon-vn"></span> </a>
-      </div>
-
-     <div className="app-container">
-        <video className="video-bg" autoPlay loop muted playsInline>
-        <source src="/bg-video.mp4" type="video/mp4" />
-        </video>
-      </div>
+<div className="language-switcher">
+      <div className="globe-icon">🌎</div> 
+      <div className="flag-links">
+        <a href="https://reminder4LD.netlify.app/" className="flag-link">
+          <span className="flag-icon flag-icon-gb"></span>
+        </a>
+        <a href="https://remindericuevn.netlify.app/" className="flag-link">
+          <span className="flag-icon flag-icon-vn"></span>
+        </a>
+    </div>
+</div>
+  
+    <div className="video-background">
+     <video className="video-bg" autoPlay loop muted playsInline>
+       <source src="/bg-video.mp4" type="video/mp4" />
+     </video>
+    </div>
      
     </>
   )

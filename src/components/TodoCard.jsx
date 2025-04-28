@@ -9,7 +9,13 @@ export function TodoCard(props) {
   const cardRef = useRef(null);
 
   useEffect(() => {
-    gsap.fromTo(cardRef.current, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" });
+    if (cardRef.current) {
+      gsap.fromTo(
+        cardRef.current,
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }
+      );
+    }
   }, []);
 
   function saveEdit() {

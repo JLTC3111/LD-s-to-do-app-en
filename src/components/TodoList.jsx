@@ -22,21 +22,21 @@ export function TodoList(props) {
       ? todos.filter((val) => val.complete)
       : todos.filter((val) => !val.complete);
 
-  useEffect(() => {
-    if (listRef.current) {
-      gsap.fromTo(
-        listRef.current.children,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: 'power2.out'
+      useEffect(() => {
+        if (listRef.current && listRef.current.children.length > 0) {
+          gsap.fromTo(
+            listRef.current.children,
+            { opacity: 0, y: 50 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              stagger: 0.15,
+              ease: "power2.out"
+            }
+          );
         }
-      );
-    }
-  }, [filteredTodos.length]);
+      }, [todos]); // ✅ better to depend on full todos array!
 
   const onDragEnd = (result) => {
     if (!result.destination) return;
