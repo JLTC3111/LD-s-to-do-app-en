@@ -95,9 +95,7 @@ export function TodoCard(props) {
             </button>
           </>
         ) : (
-          <>
-          
-            
+          <>  
             <button onClick={() => handleComplete(todoId)} disabled={todo.complete} onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave} >
             <h6>Done</h6></button>
               

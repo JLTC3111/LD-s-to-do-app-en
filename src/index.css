@@ -85,7 +85,7 @@ hr {
   gap: 1rem;
   position: relative;
   z-index: 5;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .todo-buttons button {
@@ -293,7 +293,7 @@ footer {
 
   .language-switcher {
     position: absolute; 
-    top: 8.5%;
+    top: 7.5%;
     right: 4%; 
     gap: 5px; /* Adjust spacing between flags */
     box-shadow: 20px 20px 20px rgba(208, 63, 63, 0.5);
@@ -311,6 +311,12 @@ footer {
 }
 
 .input-container input {
-  max-width: 400px;
+  max-width: 600px;
+}
+
+.todo-buttons {
+  width: 100%;
+  align-items: center;
+  justify-content: center; /* buttons start from left */
 }
 }
