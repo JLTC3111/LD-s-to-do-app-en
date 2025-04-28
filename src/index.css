@@ -196,9 +196,9 @@ footer {
 }
 
 .language-switcher {
-  position: absolute; /* Ensure it moves relative to <body> */
-  top: 90px; /* Adjust vertical positioning */
-  right: 450px; /* Adjust horizontal positioning */
+  position: absolute; 
+  top: 10%;
+  right: 32.5%; 
   display: flex;
   gap: 8px; /* Adjust spacing between flags */
   align-items: center;
@@ -277,7 +277,11 @@ footer {
     width: 100%;
   }
   .language-switcher {
-    gap: 10px; /* Adjust spacing between flags */
+    position: absolute; 
+    top:10%;
+    right: 20%; 
+    
+    gap: 5px; /* Adjust spacing between flags */
     box-shadow: 20px 20px 20px rgba(208, 63, 63, 0.5);
 }
 
