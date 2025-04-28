@@ -259,37 +259,21 @@ footer {
 
   .todo-item {
     flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+    justify-content: left;
     gap: 0.5rem;
   }
 
-  .video-background {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-  }
-
-  .video-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
+  .todo-buttons {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* Ensures it covers the entire screen */
-    z-index: -1;
-    /* Keeps it behind other content */
+    align-items: center;
   }
-
+  
   .content {
     position: relative;
     color: white;
     text-align: center;
     z-index: 1;
   }
-
 
   .language-switcher {
     position: absolute; 
@@ -306,16 +290,8 @@ footer {
     z-index: 1000; /* Ensure it stays on top of video */
 }
 
-.flag-link:hover {
-    transform: scale(1.25);
-}
 
 .input-container input {
   max-width: 400px;
-}
-
-.todo-buttons {
-  width: 100%;
-  align-items: center;
 }
 }
