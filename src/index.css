@@ -214,7 +214,7 @@ footer {
 }
 
 .language-switcher:hover {
-  width: 120px; /* expand on hover */
+  width: 140px; /* expand on hover */
 }
 
 .globe-icon {
@@ -300,7 +300,7 @@ footer {
 }
 
 .flag-link {
-    font-size: 28px; /* Adjust flag size */
+    font-size: 20px; /* Adjust flag size */
     cursor: pointer;
     transition: transform 0.3s;
     z-index: 1000; /* Ensure it stays on top of video */
