@@ -254,7 +254,10 @@ footer {
 
 @media (max-width:640px) {
   .tab-button {
-    padding: 0.5rem 1.5rem;
+    display: flex;
+    white-space: nowrap;
+    justify-content: left;
+    padding: 0.25rem 0.5rem;
   }
 
   .todo-item {
