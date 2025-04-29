@@ -170,7 +170,7 @@ footer {
   background-color: #333;
   color: white;
   display: flex;
-  justify-content: left;
+  justify-content: center;
 }
 
 .video-background {
@@ -193,8 +193,8 @@ footer {
 }
 
 .language-switcher {
-  position: fixed;
-  top: 7.5%;
+  position: absolute;
+  top: 6.5%;
   right: 26.5%;
   display: flex;
   align-items: center;
@@ -274,8 +274,8 @@ footer {
 
   .language-switcher {
     position: absolute; 
-    top: 2%;
-    right: 12.5%; 
+    top: 2.5%;
+    right: 2.5%; 
     gap: 5px; /* Adjust spacing between flags */
     box-shadow: 20px 20px 20px rgba(208, 63, 63, 0.5);
 }
