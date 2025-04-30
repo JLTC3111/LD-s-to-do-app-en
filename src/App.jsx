@@ -3,6 +3,8 @@ import { Tabs } from "./components/Tabs"
 import { TodoInput } from "./components/TodoInput"
 import { TodoList } from "./components/TodoList"
 import { useState, useEffect } from 'react' 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   
@@ -23,7 +25,7 @@ function App() {
     setTodos(newTodoList);
     handleSaveData(newTodoList);
 
-    if (selectedTab === 'All' || 'Completed') {
+    if (selectedTab === 'All' || selectedTab === 'Completed') {
       setSelectedTab('Incomplete');
     }
   }
@@ -40,10 +42,14 @@ function App() {
     const toDelete = todos.find(todo => todo.id === id);
     if (!toDelete) return;
   
+    // Avoid overwriting undo with same task
+    if (lastDeletedTodo && lastDeletedTodo.id === id) return;
+  
     const newTodoList = todos.filter(todo => todo.id !== id);
     setTodos(newTodoList);
-    setLastDeletedTodo(toDelete); // ✅ store for undo
+    setLastDeletedTodo(toDelete);
     handleSaveData(newTodoList);
+    toast.error('❌ Task deleted');
   }
   
   function handleEditTodo(id, newText) {
@@ -83,6 +89,7 @@ function App() {
         setTodos(updated);
         handleSaveData(updated);
         setLastDeletedTodo(null);
+        toast.success('✅ Task restored');
       }
     };
     
@@ -120,7 +127,7 @@ function App() {
        <source src="/bg-video.mp4" type="video/mp4" />
      </video>
     </div>
-     
+    <ToastContainer position="bottom-center" autoClose={2500} hideProgressBar />
     </>
   )
 }
