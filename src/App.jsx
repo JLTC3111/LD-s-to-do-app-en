@@ -9,6 +9,7 @@ function App() {
 
   const [todos, setTodos] = useState([])
   const [selectedTab, setSelectedTab] = useState('All')
+  const [lastDeletedTodo, setLastDeletedTodo] = useState(null);
 
   function handleAddTodo(newTodo) {
     const newTodoList = [
@@ -36,8 +37,12 @@ function App() {
   }
   
   function handleDeleteTodo(id) {
+    const toDelete = todos.find(todo => todo.id === id);
+    if (!toDelete) return;
+  
     const newTodoList = todos.filter(todo => todo.id !== id);
     setTodos(newTodoList);
+    setLastDeletedTodo(toDelete); // ✅ store for undo
     handleSaveData(newTodoList);
   }
   
@@ -69,6 +74,21 @@ function App() {
   useEffect(() => {
     document.title = "Reminder4LD"; // Change this to your desired title
   }, []);
+
+  useEffect(() => {
+    const handleUndoKey = (e) => {
+      const isUndo = (e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z';
+      if (isUndo && lastDeletedTodo) {
+        const updated = [...todos, lastDeletedTodo];
+        setTodos(updated);
+        handleSaveData(updated);
+        setLastDeletedTodo(null);
+      }
+    };
+    
+    window.addEventListener('keydown', handleUndoKey);
+    return () => window.removeEventListener('keydown', handleUndoKey);
+  }, [lastDeletedTodo, todos]);
       
   
 
