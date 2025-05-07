@@ -50,7 +50,8 @@ export function TodoCard(props) {
       ease: "power1.out"
     });
     handleCompleteTodo(todoId);
-  }
+  };
+  
 
   function handleEdit() {
     gsap.to(cardRef.current, {

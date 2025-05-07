@@ -36,6 +36,16 @@ function App() {
     );
     setTodos(newTodoList);
     handleSaveData(newTodoList);
+
+    toast.success("🎉 Task Done!", {
+      position: "top-center",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      theme: "colored",
+    })
   }
   
   function handleDeleteTodo(id) {
