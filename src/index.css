@@ -19,6 +19,7 @@ h1 {
 }
 
 .tab-container {
+  white-space: nowrap;
   overflow-x: auto;
 }
 
@@ -193,9 +194,8 @@ footer {
 }
 
 .language-switcher {
-  position: absolute;
-  top: 6.5%;
-  right: 26.5%;
+  position: sticky;
+  top: 100px;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -204,7 +204,7 @@ footer {
   border-radius: 8px;
   backdrop-filter: blur(1.5px);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-  z-index: 1000;
+  z-index: 10;
   overflow: hidden;
   transition: width 0.4s ease;
   width: 50px; /* default small size */
@@ -273,9 +273,8 @@ footer {
   }
 
   .language-switcher {
-    position: absolute; 
-    top: 2.5%;
-    right: 2.5%; 
+    position: sticky; 
+    top: 75px;
     gap: 5px; /* Adjust spacing between flags */
     box-shadow: 20px 20px 20px rgba(208, 63, 63, 0.5);
 }
