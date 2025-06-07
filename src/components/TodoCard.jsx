@@ -37,18 +37,19 @@ export function TodoCard(props) {
   function handleDelete() {
     gsap.to(cardRef.current, {
       opacity: 0,
-      y: 30,
-      duration: 0.4,
-      ease: "power2.in",
+      y: 40,
+      duration: .5,
+      ease: "power2.inout",
       onComplete: () => handleDeleteTodo(todoId),
     });
   }
 
   function handleComplete() {
     gsap.to(cardRef.current, {
-      duration: 0.5,
-      ease: "power1.out"
-    });
+      x: 50,
+      opacity: 0,
+      duration: .5,
+      ease: "power2.out"})
     handleCompleteTodo(todoId);
   };
   
@@ -70,7 +71,7 @@ export function TodoCard(props) {
   };
 
   return (
-    <div className={`card todo-item ${todo.complete ? 'completed-task' : ''}`}>
+    <div ref={cardRef} className={`card todo-item ${todo.complete ? 'completed-task' : ''}`}>
       {isEditing ? (
         <input
           value={editedText}

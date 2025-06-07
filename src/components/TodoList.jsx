@@ -9,6 +9,7 @@ export function TodoList(props) {
     selectedTab,
     setTodos,
     handleEditTodo,
+    cardRefs,
     handleDeleteTodo,
     handleCompleteTodo,
   } = props;
@@ -89,8 +90,9 @@ export function TodoList(props) {
           todo={todo}
           todoId={todo.id} 
           handleEditTodo={handleEditTodo}
+          cardRef={el => cardRefs.current.set(todo.id, el)}
           handleDeleteTodo={handleDeleteTodo}
-          handleCompleteTodo={handleCompleteTodo}
+          handleCompleteTodo={() => handleCompleteTodo(todo.id)}
         />
       </div>
     )}

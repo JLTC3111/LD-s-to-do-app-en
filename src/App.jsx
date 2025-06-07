@@ -4,6 +4,8 @@ import { TodoInput } from "./components/TodoInput"
 import { TodoList } from "./components/TodoList"
 import { useState, useEffect } from 'react' 
 import { ToastContainer, toast } from 'react-toastify';
+import gsap from "gsap"; 
+import { useRef } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
@@ -107,7 +109,7 @@ function App() {
     return () => window.removeEventListener('keydown', handleUndoKey);
   }, [lastDeletedTodo, todos]);
       
-  
+const cardRefs = useRef(new Map());
 
   return (
 
