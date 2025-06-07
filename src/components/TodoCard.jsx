@@ -46,13 +46,13 @@ export function TodoCard(props) {
 
   function handleComplete() {
     gsap.to(cardRef.current, {
-      x: 50,
+      x: 100,
       opacity: 0,
-      duration: .5,
-      ease: "power2.out"})
-    handleCompleteTodo(todoId);
-  };
-  
+      duration: 0.5,
+      ease: "power2.out",
+      onComplete: () => handleCompleteTodo(todoId),
+    });
+  }
 
   function handleEdit() {
     gsap.to(cardRef.current, {
