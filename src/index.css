@@ -29,6 +29,18 @@ h1 {
   padding: 0.5rem 1rem;
   cursor: pointer;
   background: rgb(254, 254, 244);
+  animation: dropDown 3s ease-in-out;
+}
+
+@keyframes dropDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
 }
 
 .tab-button span {
@@ -37,10 +49,11 @@ h1 {
 }
 
 .tab-button:hover {
-  transform: translate(0);
+  transform: scale(1.05);
 }
 
 .tab-selected {
+  font-weight: bold;
   position: relative;
 }
 
