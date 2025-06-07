@@ -29,7 +29,7 @@ h1 {
   padding: 0.5rem 1rem;
   cursor: pointer;
   background: rgb(254, 254, 244);
-  animation: dropDown 3s ease-in-out;
+  animation: dropDown 2s ease-in-out;
 }
 
 @keyframes dropDown {
