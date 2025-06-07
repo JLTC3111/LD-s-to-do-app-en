@@ -52,9 +52,22 @@ h1 {
   transform: scale(1.05);
 }
 
+@keyframes flipUp {
+  0% {
+    transform: translateY(25%);
+  }
+  50% {
+    transform: translateY(-25%)
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
 .tab-selected {
   font-weight: bold;
   position: relative;
+  animation: flipUp 1s ease-in-out;
 }
 
 .tab-selected::after {
