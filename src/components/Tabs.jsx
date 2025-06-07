@@ -2,6 +2,7 @@
 export function Tabs(props) {
     const { todos, selectedTab, setSelectedTab } = props
     const tabs = ['All', 'Incomplete', 'Completed']
+    
 
     return (
         <nav className="tab-container">
