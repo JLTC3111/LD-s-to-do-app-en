@@ -1,4 +1,5 @@
 import { useState } from "react";
+import soundManager from '../utils/sounds';
 
 export function TodoInput(props) {
   const { handleAddTodo } = props;
@@ -6,7 +7,10 @@ export function TodoInput(props) {
   
 
   function submitInput() {
-    if (!inputValue.trim()) return;
+    if (!inputValue.trim()) {
+      soundManager.playError();
+      return;
+    }
     
     handleAddTodo(inputValue.trim());
     setInputValue('');

@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
+import soundManager from '../utils/sounds';
 
 export function TodoCard(props) {
   const { todo, todoId, handleDeleteTodo, handleCompleteTodo, handleEditTodo } = props;
@@ -19,7 +20,10 @@ export function TodoCard(props) {
   }, []);
 
   function saveEdit() {
-    if (!editedText.trim()) return;
+    if (!editedText.trim()) {
+      soundManager.playError();
+      return;
+    }
     handleEditTodo(todoId, editedText);
     setIsEditing(false);
   }
@@ -30,7 +34,7 @@ export function TodoCard(props) {
   }
 
   function handleKeyDown(e) {
-    if (e.key === 'Enter') saveEdit();
+    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) saveEdit();
     if (e.key === 'Escape') cancelEdit();
   }
 
@@ -73,12 +77,20 @@ export function TodoCard(props) {
   return (
     <div ref={cardRef} className={`card todo-item ${todo.complete ? 'completed-task' : ''}`}>
       {isEditing ? (
-        <input
+        <textarea
           value={editedText}
           onChange={(e) => setEditedText(e.target.value)}
           onKeyDown={handleKeyDown}
           onBlur={saveEdit}
           autoFocus
+          rows={Math.max(1, editedText.split('\n').length)}
+          style={{
+            resize: 'vertical',
+            minHeight: '60px',
+            fontFamily: 'inherit',
+            fontSize: 'inherit',
+            lineHeight: 'inherit'
+          }}
         />
       ) : (
         <p style={{ textDecoration: todo.complete ? "line-through" : "none" }}>

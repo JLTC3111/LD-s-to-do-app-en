@@ -12,11 +12,13 @@
   "dependencies": {
     "@hello-pangea/dnd": "^18.0.1",
     "gsap": "^3.12.7",
+    "howler": "^2.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-toastify": "^11.0.5",
     "tailwindcss": "^4.1.8",
     "toastify": "^2.0.1",
+    "use-sound": "^5.0.0",
     "uuid": "^11.1.0"
   },
   "devDependencies": {

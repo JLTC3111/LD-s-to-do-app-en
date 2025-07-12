@@ -1,4 +1,6 @@
 
+import soundManager from '../utils/sounds';
+
 export function Tabs(props) {
     const { todos, selectedTab, setSelectedTab } = props
     const tabs = ['All', 'Incomplete', 'Completed']
@@ -15,6 +17,9 @@ export function Tabs(props) {
 
                 return (
                     <button onClick={() => {
+                        if (tab !== selectedTab) {
+                            soundManager.playTabSwitch();
+                        }
                         setSelectedTab(tab)
                     }}key={tabIndex} 
                     className={"tab-button " + (tab == selectedTab ? ' tab-selected' : ' ')} >

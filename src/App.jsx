@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import gsap from "gsap"; 
 import { useRef } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
+import soundManager from './utils/sounds';
 
 function App() {
   
@@ -14,8 +15,10 @@ function App() {
   const [todos, setTodos] = useState([])
   const [selectedTab, setSelectedTab] = useState('All')
   const [lastDeletedTodo, setLastDeletedTodo] = useState(null);
+  const [soundEnabled, setSoundEnabled] = useState(true);
 
   function handleAddTodo(newTodo) {
+    soundManager.playAdd();
     const newTodoList = [
       ...todos,
       {
@@ -33,6 +36,7 @@ function App() {
   }
 
   function handleCompleteTodo(id) {
+    soundManager.playComplete();
     const newTodoList = todos.map(todo =>
       todo.id === id ? { ...todo, complete: true } : todo
     );
@@ -57,6 +61,7 @@ function App() {
     // Avoid overwriting undo with same task
     if (lastDeletedTodo && lastDeletedTodo.id === id) return;
   
+    soundManager.playDelete();
     const newTodoList = todos.filter(todo => todo.id !== id);
     setTodos(newTodoList);
     setLastDeletedTodo(toDelete);
@@ -65,6 +70,7 @@ function App() {
   }
   
   function handleEditTodo(id, newText) {
+    soundManager.playEdit();
     const newTodoList = todos.map(todo =>
       todo.id === id ? { ...todo, input: newText } : todo
     );
@@ -97,6 +103,7 @@ function App() {
     const handleUndoKey = (e) => {
       const isUndo = (e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z';
       if (isUndo && lastDeletedTodo) {
+        soundManager.playUndo();
         const updated = [...todos, lastDeletedTodo];
         setTodos(updated);
         handleSaveData(updated);
@@ -122,16 +129,29 @@ const cardRefs = useRef(new Map());
 
     <TodoInput handleAddTodo={handleAddTodo} />
       
-    <div className="language-switcher">
-          <div className="globe-icon">🌎</div> 
-          <div className="flag-links">
-            <a href="https://reminder4LD.netlify.app/" className="flag-link">
-              <span className="flag-icon flag-icon-gb"></span>
-            </a>
-            <a href="https://remindericuevn.netlify.app/" className="flag-link">
-              <span className="flag-icon flag-icon-vn"></span>
-            </a>
+    <div className="controls-container">
+      <div className="language-switcher">
+        <div className="globe-icon">🌎</div> 
+        <div className="flag-links">
+          <a href="https://reminder4LD.netlify.app/" className="flag-link">
+            <span className="flag-icon flag-icon-gb"></span>
+          </a>
+          <a href="https://remindericuevn.netlify.app/" className="flag-link">
+            <span className="flag-icon flag-icon-vn"></span>
+          </a>
         </div>
+      </div>
+      
+      <button 
+        className="sound-toggle"
+        onClick={() => {
+          const newState = soundManager.toggle();
+          setSoundEnabled(newState);
+        }}
+        title={soundEnabled ? "Disable sounds" : "Enable sounds"}
+      >
+        {soundEnabled ? "🔊" : "🔇"}
+      </button>
     </div>
   
     <div className="video-background">

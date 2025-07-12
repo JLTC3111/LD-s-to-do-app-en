@@ -162,6 +162,26 @@ hr {
   font-weight: 500;
 }
 
+.todo-item textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  border: 1px solid var(--border-secondary);
+  border-radius: var(--border-radius-small);
+  padding: 0.5rem 0.75rem;
+  background-color: var(--background-muted);
+  color: var(--color-primary);
+  outline: none;
+  resize: vertical;
+  min-height: 60px;
+  transition: border-color 0.2s ease;
+}
+
+.todo-item textarea:focus {
+  border-color: var(--border-highlight);
+}
+
 .input-container {
   display: flex;
   align-items: center;
@@ -224,9 +244,16 @@ footer {
   /* Keeps it behind other content */
 }
 
-.language-switcher {
+.controls-container {
   position: sticky;
   top: 100px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 10;
+}
+
+.language-switcher {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -235,7 +262,6 @@ footer {
   border-radius: 8px;
   backdrop-filter: blur(1.5px);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-  z-index: 10;
   overflow: hidden;
   transition: width 0.4s ease;
   width: 50px; /* default small size */
@@ -273,6 +299,28 @@ footer {
   transform: scale(1.2);
 }
 
+.sound-toggle {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  backdrop-filter: blur(1.5px);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  font-size: 20px;
+  transition: all 0.3s ease;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sound-toggle:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.2);
+}
+
 
 .completed-task {
   background-color: #d4edda; /* light green */
@@ -303,12 +351,22 @@ footer {
     z-index: 1;
   }
 
-  .language-switcher {
+  .controls-container {
     position: sticky; 
     top: 75px;
+    gap: 8px;
+  }
+
+  .language-switcher {
     gap: 5px; /* Adjust spacing between flags */
     box-shadow: 20px 20px 20px rgba(208, 63, 63, 0.5);
-}
+  }
+
+  .sound-toggle {
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+  }
 
 .flag-link {
     font-size: 20px; /* Adjust flag size */
