@@ -127,7 +127,7 @@ const cardRefs = useRef(new Map());
 
      <Tabs selectedTab={selectedTab} setSelectedTab={setSelectedTab} todos={todos} />
 
-    <TodoList handleCompleteTodo={handleCompleteTodo} handleDeleteTodo={handleDeleteTodo} handleEditTodo={handleEditTodo} selectedTab={selectedTab} todos={todos} setTodos={setTodos} />
+    <TodoList handleCompleteTodo={handleCompleteTodo} handleDeleteTodo={handleDeleteTodo} handleEditTodo={handleEditTodo} selectedTab={selectedTab} todos={todos} setTodos={setTodos} setSelectedTab={setSelectedTab} />
 
     <TodoInput handleAddTodo={handleAddTodo} />
       

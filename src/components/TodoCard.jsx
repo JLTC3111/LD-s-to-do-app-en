@@ -5,7 +5,7 @@ import soundManager from '../utils/sounds';
 
 export function TodoCard(props) {
   const { t } = useTranslation();
-  const { todo, todoId, handleDeleteTodo, handleCompleteTodo, handleEditTodo } = props;
+  const { todo, todoId, handleDeleteTodo, handleCompleteTodo, handleEditTodo, setSelectedTab } = props;
   const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState(todo.input);
 
@@ -28,6 +28,7 @@ export function TodoCard(props) {
     }
     handleEditTodo(todoId, editedText);
     setIsEditing(false);
+    if (setSelectedTab) setSelectedTab('Incomplete');
   }
 
   function cancelEdit() {
