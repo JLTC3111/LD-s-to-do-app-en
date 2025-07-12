@@ -288,7 +288,6 @@ footer {
 }
 
 .language-dropdown {
-  
   position: relative;
   z-index: 10;
 }
@@ -299,14 +298,14 @@ footer {
   gap: clamp(6px, 1.5vw, 8px);
   background: rgba(255, 255, 255, 0.1);
   border: none;
-  padding: clamp(6px, 1.5vw, 8px) clamp(10px, 2vw, 12px);
+  padding: clamp(3px, 1.5vw, 6px) clamp(6px, 2vw, 12px);
   border-radius: 8px;
   backdrop-filter: blur(1.5px);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   transition: all 0.3s ease;
   color: rgb(0, 0, 0);
-  font-size: clamp(14px, 2.5vw, 16px);
+  font-size: clamp(12px, 1.5vw, 18px);
 }
 
 .language-dropdown-toggle:hover {
@@ -315,7 +314,7 @@ footer {
 }
 
 .current-language-name {
-  font-size: clamp(0.875rem, 2.5vw, 1.125rem);
+  font-size: clamp(12px, 1.5vw, 18px);
   font-weight: 500;
   white-space: nowrap;
 }
@@ -332,14 +331,14 @@ footer {
 .language-dropdown-menu {
   position: absolute;
   top: 100%;
-  right: 0;
+  right: -2.5px;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(10px);
   border-radius: 8px;
   box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3);
   padding: 8px 0;
   margin-top: 8px;
-  min-width: 150px;
+  min-width: 125px;
   max-width: 200px;
   animation: dropdownFadeIn 0.3s ease;
   z-index: 1000;
@@ -499,9 +498,9 @@ footer {
   }
 
   .language-dropdown-menu {
-    min-width: 140px;
-    max-width: 200px;
-    right: 0;
+    min-width: 125px;
+    max-width: 180px;
+    left: 1.5px;
   }
 
   .language-option {
