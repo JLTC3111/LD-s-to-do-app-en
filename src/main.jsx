@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import './fanta.css'
-import { useEffect } from "react";
+import './i18n/index.js'
 
 
 createRoot(document.getElementById('root')).render(

@@ -1,0 +1,37 @@
+{
+  "app": {
+    "title": "Reminder4LD"
+  },
+  "header": {
+    "incompleteTasks": "Incomplete Tasks",
+    "incompleteTask": "Incomplete Task"
+  },
+  "tabs": {
+    "all": "All",
+    "incomplete": "Incomplete",
+    "completed": "Completed"
+  },
+  "todo": {
+    "addPlaceholder": "Add Task",
+    "save": "Save",
+    "cancel": "Cancel",
+    "done": "Done",
+    "delete": "Delete",
+    "edit": "Edit"
+  },
+  "notifications": {
+    "taskDone": "🎉 Task Done!",
+    "taskDeleted": "❌ Task deleted",
+    "taskRestored": "✅ Task restored",
+    "emptyTaskError": "Please enter a task"
+  },
+  "controls": {
+    "soundOn": "Enable sounds",
+    "soundOff": "Disable sounds"
+  },
+  "footer": {
+    "by": "By ✨ LD @",
+    "github": "GitHub",
+    "copyright": "© 2025, All rights reserved."
+  }
+} 

@@ -1,0 +1,37 @@
+{
+  "app": {
+    "title": "Erinnerungen4LD"
+  },
+  "header": {
+    "incompleteTasks": "Unvollständige Aufgaben",
+    "incompleteTask": "Unvollständige Aufgabe"
+  },
+  "tabs": {
+    "all": "Alle",
+    "incomplete": "Unvollständig",
+    "completed": "Abgeschlossen"
+  },
+  "todo": {
+    "addPlaceholder": "Aufgabe hinzufügen",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "done": "Erledigt",
+    "delete": "Löschen",
+    "edit": "Bearbeiten"
+  },
+  "notifications": {
+    "taskDone": "🎉 Aufgabe erledigt!",
+    "taskDeleted": "❌ Aufgabe gelöscht",
+    "taskRestored": "✅ Aufgabe wiederhergestellt",
+    "emptyTaskError": "Bitte geben Sie eine Aufgabe ein"
+  },
+  "controls": {
+    "soundOn": "Töne aktivieren",
+    "soundOff": "Töne deaktivieren"
+  },
+  "footer": {
+    "by": "Von ✨ LD @",
+    "github": "GitHub",
+    "copyright": "© 2025, Alle Rechte vorbehalten."
+  }
+} 

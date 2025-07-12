@@ -1,8 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
+import { useTranslation } from 'react-i18next';
 import soundManager from '../utils/sounds';
 
 export function TodoCard(props) {
+  const { t } = useTranslation();
   const { todo, todoId, handleDeleteTodo, handleCompleteTodo, handleEditTodo } = props;
   const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState(todo.input);
@@ -102,23 +104,23 @@ export function TodoCard(props) {
         {isEditing ? (
           <>
             <button onClick={saveEdit} onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave}>
-              <h6>Save</h6>
+              <h6>{t('todo.save')}</h6>
             </button>
             <button onClick={cancelEdit} onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave}>
-              <h6>Cancel</h6>
+              <h6>{t('todo.cancel')}</h6>
             </button>
           </>
         ) : (
           <>  
             <button onClick={() => handleComplete(todoId)} disabled={todo.complete} onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave} >
-            <h6>Done</h6></button>
+            <h6>{t('todo.done')}</h6></button>
               
             <button className="delete-button" onClick={() => handleDelete(todoId)} onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave}>
-            <h6>Delete</h6>
+            <h6>{t('todo.delete')}</h6>
             </button>
 
             <button onClick={() => setIsEditing(true)} disabled={todo.complete} onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave}>
-              <h6>Edit</h6>
+              <h6>{t('todo.edit')}</h6>
             </button>
              
               

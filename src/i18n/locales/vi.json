@@ -1,0 +1,37 @@
+{
+  "app": {
+    "title": "Nhắc Nhở4LD"
+  },
+  "header": {
+    "incompleteTasks": "Công Việc Chưa Hoàn Thành",
+    "incompleteTask": "Công Việc Chưa Hoàn Thành"
+  },
+  "tabs": {
+    "all": "Tất Cả",
+    "incomplete": "Chưa Hoàn Thành",
+    "completed": "Đã Hoàn Thành"
+  },
+  "todo": {
+    "addPlaceholder": "Thêm Công Việc",
+    "save": "Lưu",
+    "cancel": "Hủy",
+    "done": "Xong",
+    "delete": "Xóa",
+    "edit": "Sửa"
+  },
+  "notifications": {
+    "taskDone": "🎉 Hoàn thành!",
+    "taskDeleted": "❌ Đã xóa công việc",
+    "taskRestored": "✅ Đã khôi phục công việc",
+    "emptyTaskError": "Vui lòng nhập công việc"
+  },
+  "controls": {
+    "soundOn": "Bật âm thanh",
+    "soundOff": "Tắt âm thanh"
+  },
+  "footer": {
+    "by": "Bởi ✨ LD @",
+    "github": "GitHub",
+    "copyright": "© 2025, Bảo lưu mọi quyền."
+  }
+} 

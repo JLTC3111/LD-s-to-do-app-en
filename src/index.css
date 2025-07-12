@@ -19,8 +19,31 @@ h1 {
 }
 
 .tab-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+  margin-bottom: -1rem;
+}
+
+.tabs-section {
+  display: flex;
   white-space: nowrap;
   overflow-x: auto;
+  flex: 1;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.tabs-section::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.tabs-controls {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .tab-button {
@@ -30,7 +53,12 @@ h1 {
   cursor: pointer;
   background: rgb(254, 254, 244);
   animation: dropDown 1.5s ease-in-out;
-  
+}
+
+.tab-button h4 {
+  font-size: clamp(0.875rem, 2.5vw, 1.125rem);
+  line-height: 1.4;
+  margin: 0;
 }
 
 @keyframes dropDown {
@@ -216,13 +244,17 @@ hr {
 }
 
 footer {
+  display: none !important;
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: #333;
+  background-color: rgba(51, 51, 51, 0.8);
   color: white;
   display: flex;
   justify-content: center;
+  padding: 10px;
+  backdrop-filter: blur(5px);
+  z-index: 100;
 }
 
 .video-background {
@@ -244,6 +276,8 @@ footer {
   /* Keeps it behind other content */
 }
 
+
+
 .controls-container {
   position: sticky;
   top: 100px;
@@ -253,22 +287,73 @@ footer {
   z-index: 10;
 }
 
-.language-switcher {
+.language-dropdown {
+  
+  position: relative;
+  z-index: 10;
+}
+
+.language-dropdown-toggle {
   display: flex;
   align-items: center;
-  gap: 8px;
-  background:rgba(255, 255, 255, 0.1);
-  padding: 4px 8px;
+  gap: clamp(6px, 1.5vw, 8px);
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  padding: clamp(6px, 1.5vw, 8px) clamp(10px, 2vw, 12px);
   border-radius: 8px;
   backdrop-filter: blur(1.5px);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-  transition: width 0.4s ease;
-  width: 50px; /* default small size */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: rgb(0, 0, 0);
+  font-size: clamp(14px, 2.5vw, 16px);
 }
 
-.language-switcher:hover {
-  width: 140px; /* expand on hover */
+.language-dropdown-toggle:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.current-language-name {
+  font-size: clamp(0.875rem, 2.5vw, 1.125rem);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.dropdown-arrow {
+  font-size: clamp(10px, 2vw, 12px);
+  transition: transform 0.3s ease;
+}
+
+.language-dropdown.open .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.language-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.3);
+  padding: 8px 0;
+  margin-top: 8px;
+  min-width: 150px;
+  max-width: 200px;
+  animation: dropdownFadeIn 0.3s ease;
+  z-index: 1000;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .globe-icon {
@@ -276,23 +361,46 @@ footer {
   cursor: pointer;
 }
 
-.flag-links {
+.language-option {
   display: flex;
-  gap: 8px;
-  overflow: hidden;
-  opacity: 0;
-  transform: translateX(-20px);
-  transition: all 0.4s ease;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 16px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #333;
+  font-size: 14px;
+  text-align: left;
 }
 
-.language-switcher:hover .flag-links {
-  opacity: 1;
-  transform: translateX(0);
+.language-option:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.language-option.active {
+  background: rgba(37, 99, 235, 0.1);
+  color: #2563eb;
+  font-weight: 500;
+}
+
+.language-name {
+  flex: 1;
+  white-space: nowrap;
 }
 
 .flag-link {
   font-size: 20px;
   transition: transform 0.3s;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .flag-link:hover {
@@ -328,9 +436,29 @@ footer {
   opacity: 0.8;
 }
 
-@media (max-width:640px) {
+@media (max-width:767px) {
+  .tab-container {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: stretch;
+  }
+
+  .tabs-section {
+    order: 2;
+  }
+
+  .tabs-controls {
+    order: 1;
+    justify-content: flex-start;
+  }
+
   .tab-button {
     flex-wrap: nowrap;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .tab-button h4 {
+    font-size: clamp(1.25rem, 3.5vw, 2.5rem);
   }
 
   .todo-item {
@@ -357,9 +485,28 @@ footer {
     gap: 8px;
   }
 
-  .language-switcher {
-    gap: 5px; /* Adjust spacing between flags */
-    box-shadow: 20px 20px 20px rgba(208, 63, 63, 0.5);
+  .language-dropdown-toggle {
+    padding: clamp(8px, 2vw, 12px) clamp(12px, 2.5vw, 16px);
+    font-size: clamp(16px, 3vw, 20px);
+  }
+
+  .current-language-name {
+    font-size: clamp(14px, 3vw, 18px);
+  }
+
+  .dropdown-arrow {
+    font-size: clamp(12px, 2.5vw, 16px);
+  }
+
+  .language-dropdown-menu {
+    min-width: 140px;
+    max-width: 200px;
+    right: 0;
+  }
+
+  .language-option {
+    padding: 8px 12px;
+    font-size: 13px;
   }
 
   .sound-toggle {

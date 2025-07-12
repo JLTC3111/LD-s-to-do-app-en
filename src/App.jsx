@@ -2,15 +2,17 @@ import { Header } from "./components/Header"
 import { Tabs } from "./components/Tabs"
 import { TodoInput } from "./components/TodoInput"
 import { TodoList } from "./components/TodoList"
+import { Footer } from "./components/Footer"
 import { useState, useEffect } from 'react' 
 import { ToastContainer, toast } from 'react-toastify';
 import gsap from "gsap"; 
 import { useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import 'react-toastify/dist/ReactToastify.css';
 import soundManager from './utils/sounds';
 
 function App() {
-  
+  const { t } = useTranslation();
 
   const [todos, setTodos] = useState([])
   const [selectedTab, setSelectedTab] = useState('All')
@@ -43,7 +45,7 @@ function App() {
     setTodos(newTodoList);
     handleSaveData(newTodoList);
 
-    toast.success("🎉 Task Done!", {
+    toast.success(t('notifications.taskDone'), {
       position: "top-center",
       autoClose: 2000,
       hideProgressBar: false,
@@ -66,7 +68,7 @@ function App() {
     setTodos(newTodoList);
     setLastDeletedTodo(toDelete);
     handleSaveData(newTodoList);
-    toast.error('❌ Task deleted');
+    toast.error(t('notifications.taskDeleted'));
   }
   
   function handleEditTodo(id, newText) {
@@ -96,7 +98,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    document.title = "Reminder4LD"; // Change this to your desired title
+    document.title = t('app.title');
   }, []);
 
   useEffect(() => {
@@ -108,7 +110,7 @@ function App() {
         setTodos(updated);
         handleSaveData(updated);
         setLastDeletedTodo(null);
-        toast.success('✅ Task restored');
+        toast.success(t('notifications.taskRestored'));
       }
     };
     
@@ -130,25 +132,13 @@ const cardRefs = useRef(new Map());
     <TodoInput handleAddTodo={handleAddTodo} />
       
     <div className="controls-container">
-      <div className="language-switcher">
-        <div className="globe-icon">🌎</div> 
-        <div className="flag-links">
-          <a href="https://reminder4LD.netlify.app/" className="flag-link">
-            <span className="flag-icon flag-icon-gb"></span>
-          </a>
-          <a href="https://remindericuevn.netlify.app/" className="flag-link">
-            <span className="flag-icon flag-icon-vn"></span>
-          </a>
-        </div>
-      </div>
-      
       <button 
         className="sound-toggle"
         onClick={() => {
           const newState = soundManager.toggle();
           setSoundEnabled(newState);
         }}
-        title={soundEnabled ? "Disable sounds" : "Enable sounds"}
+        title={soundEnabled ? t('controls.soundOff') : t('controls.soundOn')}
       >
         {soundEnabled ? "🔊" : "🔇"}
       </button>
@@ -160,6 +150,7 @@ const cardRefs = useRef(new Map());
      </video>
     </div>
     <ToastContainer position="bottom-center" autoClose={2500} hideProgressBar />
+    <Footer />
     </>
   )
 }

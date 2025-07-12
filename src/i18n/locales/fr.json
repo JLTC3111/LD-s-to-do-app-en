@@ -1,0 +1,37 @@
+{
+  "app": {
+    "title": "Rappels4LD"
+  },
+  "header": {
+    "incompleteTasks": "Tâches Incomplètes",
+    "incompleteTask": "Tâche Incomplète"
+  },
+  "tabs": {
+    "all": "Toutes",
+    "incomplete": "Incomplètes",
+    "completed": "Terminées"
+  },
+  "todo": {
+    "addPlaceholder": "Ajouter une Tâche",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "done": "Terminé",
+    "delete": "Supprimer",
+    "edit": "Modifier"
+  },
+  "notifications": {
+    "taskDone": "🎉 Tâche terminée !",
+    "taskDeleted": "❌ Tâche supprimée",
+    "taskRestored": "✅ Tâche restaurée",
+    "emptyTaskError": "Veuillez saisir une tâche"
+  },
+  "controls": {
+    "soundOn": "Activer les sons",
+    "soundOff": "Désactiver les sons"
+  },
+  "footer": {
+    "by": "Par ✨ LD @",
+    "github": "GitHub",
+    "copyright": "© 2025, Tous droits réservés."
+  }
+} 

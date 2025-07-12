@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useTranslation } from 'react-i18next';
 import soundManager from '../utils/sounds';
 
 export function TodoInput(props) {
+  const { t } = useTranslation();
   const { handleAddTodo } = props;
   const [inputValue, setInputValue] = useState('');
   
@@ -31,7 +33,7 @@ export function TodoInput(props) {
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         onKeyUpCapture={handleKeyDown}
-        placeholder="Add Task"
+        placeholder={t('todo.addPlaceholder')}
       />
       <button onClick={submitInput}>
         <i className="fa-solid fa-plus"></i>

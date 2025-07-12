@@ -1,0 +1,37 @@
+{
+  "app": {
+    "title": "提醒4LD"
+  },
+  "header": {
+    "incompleteTasks": "未完成任务",
+    "incompleteTask": "未完成任务"
+  },
+  "tabs": {
+    "all": "全部",
+    "incomplete": "未完成",
+    "completed": "已完成"
+  },
+  "todo": {
+    "addPlaceholder": "添加任务",
+    "save": "保存",
+    "cancel": "取消",
+    "done": "完成",
+    "delete": "删除",
+    "edit": "编辑"
+  },
+  "notifications": {
+    "taskDone": "🎉 任务完成！",
+    "taskDeleted": "❌ 任务已删除",
+    "taskRestored": "✅ 任务已恢复",
+    "emptyTaskError": "请输入任务"
+  },
+  "controls": {
+    "soundOn": "启用声音",
+    "soundOff": "禁用声音"
+  },
+  "footer": {
+    "by": "由 ✨ LD @",
+    "github": "GitHub",
+    "copyright": "© 2025, 保留所有权利。"
+  }
+} 

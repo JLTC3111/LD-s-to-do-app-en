@@ -1,0 +1,37 @@
+{
+  "app": {
+    "title": "Recordatorios4LD"
+  },
+  "header": {
+    "incompleteTasks": "Tareas Incompletas",
+    "incompleteTask": "Tarea Incompleta"
+  },
+  "tabs": {
+    "all": "Todas",
+    "incomplete": "Incompletas",
+    "completed": "Completadas"
+  },
+  "todo": {
+    "addPlaceholder": "Agregar Tarea",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "done": "Hecho",
+    "delete": "Eliminar",
+    "edit": "Editar"
+  },
+  "notifications": {
+    "taskDone": "🎉 ¡Tarea completada!",
+    "taskDeleted": "❌ Tarea eliminada",
+    "taskRestored": "✅ Tarea restaurada",
+    "emptyTaskError": "Por favor ingrese una tarea"
+  },
+  "controls": {
+    "soundOn": "Activar sonidos",
+    "soundOff": "Desactivar sonidos"
+  },
+  "footer": {
+    "by": "Por ✨ LD @",
+    "github": "GitHub",
+    "copyright": "© 2025, Todos los derechos reservados."
+  }
+} 
