@@ -305,7 +305,7 @@ footer {
   cursor: pointer;
   transition: all 0.3s ease;
   color: rgb(0, 0, 0);
-  font-size: clamp(12px, 1.5vw, 18px);
+  font-size: clamp(12px, 1.5vw, 16px);
 }
 
 .language-dropdown-toggle:hover {
@@ -314,7 +314,7 @@ footer {
 }
 
 .current-language-name {
-  font-size: clamp(12px, 1.5vw, 18px);
+  font-size: clamp(12px, 1.5vw, 15px);
   font-weight: 500;
   white-space: nowrap;
 }
