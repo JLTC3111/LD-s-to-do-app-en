@@ -1,19 +1,21 @@
 import { useState } from "react";
 import { useTranslation } from 'react-i18next';
-import soundManager from '../utils/sounds';
+import { useSoundContext } from './SoundProvider';
 
 export function TodoInput(props) {
   const { t } = useTranslation();
+  const { playSound } = useSoundContext();
   const { handleAddTodo } = props;
   const [inputValue, setInputValue] = useState('');
   
 
   function submitInput() {
     if (!inputValue.trim()) {
-      soundManager.playError();
+      playSound('error');
       return;
     }
     
+    playSound('submit');
     handleAddTodo(inputValue.trim());
     setInputValue('');
   }
@@ -33,9 +35,10 @@ export function TodoInput(props) {
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         onKeyUpCapture={handleKeyDown}
+        onFocus={() => playSound('inputFocus')}
         placeholder={t('todo.addPlaceholder')}
       />
-      <button onClick={submitInput}>
+      <button onClick={submitInput} onMouseDown={() => playSound('button')}>
         <i className="fa-solid fa-plus"></i>
       </button>
     </div>

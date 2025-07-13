@@ -29,6 +29,15 @@
     "soundOn": "Enable sounds",
     "soundOff": "Disable sounds"
   },
+  "ambient": {
+    "title": "Ambient Sounds",
+    "rain": "Rain",
+    "wind": "Wind",
+    "campfire": "Campfire",
+    "waterStream": "Water Stream",
+    "heartbeat": "Heartbeat",
+    "stopAll": "Stop All Sounds"
+  },
   "footer": {
     "by": "By ✨ LD @",
     "github": "GitHub",

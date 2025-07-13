@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
 import { useTranslation } from 'react-i18next';
-import soundManager from '../utils/sounds';
+import { useSoundContext } from './SoundProvider';
 
 export function TodoCard(props) {
   const { t } = useTranslation();
+  const { playSound } = useSoundContext();
   const { todo, todoId, handleDeleteTodo, handleCompleteTodo, handleEditTodo, setSelectedTab } = props;
   const [isEditing, setIsEditing] = useState(false);
   const [editedText, setEditedText] = useState(todo.input);
@@ -23,15 +24,17 @@ export function TodoCard(props) {
 
   function saveEdit() {
     if (!editedText.trim()) {
-      soundManager.playError();
+      playSound('error');
       return;
     }
+    playSound('completed');
     handleEditTodo(todoId, editedText);
     setIsEditing(false);
     if (setSelectedTab) setSelectedTab('Incomplete');
   }
 
   function cancelEdit() {
+    playSound('screenshot');
     setEditedText(todo.input);
     setIsEditing(false);
   }
@@ -62,6 +65,7 @@ export function TodoCard(props) {
   }
 
   function handleEdit() {
+    playSound('miss');
     gsap.to(cardRef.current, {
       duration: 0.5,
       ease: "power1.out"
@@ -104,23 +108,23 @@ export function TodoCard(props) {
       <div className="todo-buttons">
         {isEditing ? (
           <>
-            <button onClick={saveEdit} onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave}>
+            <button onClick={saveEdit} onMouseDown={() => playSound('button')} onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave}>
               <h6>{t('todo.save')}</h6>
             </button>
-            <button onClick={cancelEdit} onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave}>
+            <button onClick={cancelEdit} onMouseDown={() => playSound('button')} onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave}>
               <h6>{t('todo.cancel')}</h6>
             </button>
           </>
         ) : (
           <>  
-            <button onClick={() => handleComplete(todoId)} disabled={todo.complete} onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave} >
+            <button onClick={() => handleComplete(todoId)} disabled={todo.complete} onMouseDown={() => playSound('button')} onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave} >
             <h6>{t('todo.done')}</h6></button>
               
-            <button className="delete-button" onClick={() => handleDelete(todoId)} onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave}>
+            <button className="delete-button" onClick={() => handleDelete(todoId)} onMouseDown={() => playSound('button')} onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave}>
             <h6>{t('todo.delete')}</h6>
             </button>
 
-            <button onClick={() => setIsEditing(true)} disabled={todo.complete} onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave}>
+            <button onClick={() => setIsEditing(true)} disabled={todo.complete} onMouseDown={() => playSound('button')} onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave}>
               <h6>{t('todo.edit')}</h6>
             </button>
              

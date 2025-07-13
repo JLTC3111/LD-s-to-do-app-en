@@ -1,10 +1,11 @@
 
 import { useTranslation } from 'react-i18next';
 import { LanguageSwitcher } from './LanguageSwitcher';
-import soundManager from '../utils/sounds';
+import { useSoundContext } from './SoundProvider';
 
 export function Tabs(props) {
     const { t } = useTranslation();
+    const { playSound } = useSoundContext();
     const { todos, selectedTab, setSelectedTab } = props
     const tabs = [
         { key: 'All', label: t('tabs.all') },
@@ -24,12 +25,12 @@ export function Tabs(props) {
                             todos.filter(val => val.complete).length
 
                     return (
-                        <button onClick={() => {
-                            if (tab.key !== selectedTab) {
-                                soundManager.playTabSwitch();
-                            }
-                            setSelectedTab(tab.key)
-                        }}key={tabIndex} 
+                                            <button onClick={() => {
+                        if (tab.key !== selectedTab) {
+                            playSound('tabSwitch');
+                        }
+                        setSelectedTab(tab.key)
+                    }}key={tabIndex} 
                         className={"tab-button " + (tab.key == selectedTab ? ' tab-selected' : ' ')} >
                         <h4>{tab.label} <span>({numOfTasks})</span></h4>
                         </button>

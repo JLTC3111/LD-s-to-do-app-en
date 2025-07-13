@@ -29,6 +29,15 @@
     "soundOn": "Bật âm thanh",
     "soundOff": "Tắt âm thanh"
   },
+  "ambient": {
+    "title": "Âm Thanh Nền",
+    "rain": "Mưa",
+    "wind": "Gió",
+    "campfire": "Lửa Trại",
+    "waterStream": "Suối Nước",
+    "heartbeat": "Nhịp Tim",
+    "stopAll": "Dừng Tất Cả"
+  },
   "footer": {
     "by": "Bởi ✨ LD @",
     "github": "GitHub",

@@ -3,24 +3,26 @@ import { Tabs } from "./components/Tabs"
 import { TodoInput } from "./components/TodoInput"
 import { TodoList } from "./components/TodoList"
 import { Footer } from "./components/Footer"
+import { AmbientSounds } from "./components/AmbientSounds"
 import { useState, useEffect } from 'react' 
 import { ToastContainer, toast } from 'react-toastify';
-import gsap from "gsap"; 
+import gsap from "gsap";  
 import { useRef } from 'react';
+import Splashcursor from "./components/Splashcursor"
 import { useTranslation } from 'react-i18next';
 import 'react-toastify/dist/ReactToastify.css';
-import soundManager from './utils/sounds';
+import { SoundProvider, useSoundContext } from './components/SoundProvider';
 
-function App() {
+function AppContent() {
   const { t } = useTranslation();
+  const { playSound, soundEnabled, toggleSound } = useSoundContext();
 
   const [todos, setTodos] = useState([])
   const [selectedTab, setSelectedTab] = useState('All')
   const [lastDeletedTodo, setLastDeletedTodo] = useState(null);
-  const [soundEnabled, setSoundEnabled] = useState(true);
 
   function handleAddTodo(newTodo) {
-    soundManager.playAdd();
+    playSound('success');
     const newTodoList = [
       ...todos,
       {
@@ -38,7 +40,7 @@ function App() {
   }
 
   function handleCompleteTodo(id) {
-    soundManager.playComplete();
+    playSound('coin_bling');
     const newTodoList = todos.map(todo =>
       todo.id === id ? { ...todo, complete: true } : todo
     );
@@ -63,7 +65,7 @@ function App() {
     // Avoid overwriting undo with same task
     if (lastDeletedTodo && lastDeletedTodo.id === id) return;
   
-    soundManager.playDelete();
+    playSound('panel_expand');
     const newTodoList = todos.filter(todo => todo.id !== id);
     setTodos(newTodoList);
     setLastDeletedTodo(toDelete);
@@ -72,7 +74,7 @@ function App() {
   }
   
   function handleEditTodo(id, newText) {
-    soundManager.playEdit();
+    playSound('edit');
     const newTodoList = todos.map(todo =>
       todo.id === id ? { ...todo, input: newText } : todo
     );
@@ -99,13 +101,15 @@ function App() {
 
   useEffect(() => {
     document.title = t('app.title');
+    // Play boot up sound when app loads
+    setTimeout(() => playSound('boot_up'), 500);
   }, []);
 
   useEffect(() => {
     const handleUndoKey = (e) => {
       const isUndo = (e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z';
       if (isUndo && lastDeletedTodo) {
-        soundManager.playUndo();
+        playSound('undo');
         const updated = [...todos, lastDeletedTodo];
         setTodos(updated);
         handleSaveData(updated);
@@ -134,14 +138,13 @@ const cardRefs = useRef(new Map());
     <div className="controls-container">
       <button 
         className="sound-toggle"
-        onClick={() => {
-          const newState = soundManager.toggle();
-          setSoundEnabled(newState);
-        }}
+        onClick={toggleSound}
+        onMouseDown={() => playSound('toggle')}
         title={soundEnabled ? t('controls.soundOff') : t('controls.soundOn')}
       >
         {soundEnabled ? "🔊" : "🔇"}
       </button>
+      <AmbientSounds />
     </div>
   
     <div className="video-background">
@@ -153,6 +156,17 @@ const cardRefs = useRef(new Map());
     <Footer />
     </>
   )
+}
+
+function App() {
+  return (
+    <>
+    <Splashcursor />
+    <SoundProvider>
+      <AppContent /> 
+    </SoundProvider>
+    </>
+  );
 }
 
 export default App
