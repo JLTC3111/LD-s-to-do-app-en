@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSoundContext } from './SoundProvider';
 
@@ -6,6 +6,7 @@ export function AmbientSounds() {
   const { t } = useTranslation();
   const { soundEnabled, playSound, playAmbient, stopAmbient, stopAllAmbients, activeAmbients } = useSoundContext();
   const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef(null);
 
   const ambientOptions = [
     { id: 'rain', name: t('ambient.rain'), icon: '🌧️' },
@@ -16,6 +17,23 @@ export function AmbientSounds() {
   ];
 
 
+
+  // Outside click handler to close menu
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -67,14 +85,13 @@ export function AmbientSounds() {
   }, [soundEnabled, activeAmbients, playAmbient, stopAllAmbients]);
 
   return (
-    <div className="ambient-sounds">
+    <div className="ambient-sounds" ref={menuRef}>
       <button 
-        className="ambient-toggle"
+        className="ambient-toggle btn-hover-effect"
         onClick={() => setIsOpen(!isOpen)}
-        onMouseDown={() => soundEnabled && playSound('button')}
         title={`${t('ambient.title')} (1-5: Toggle, 0: Stop All)`}
       >
-        🎵
+        <img src="/img/lullaby.png" alt="Music" style={{ width: '20px', height: '20px' }} />
         {activeAmbients.size > 0 && (
           <span className="ambient-count">
             {activeAmbients.size}

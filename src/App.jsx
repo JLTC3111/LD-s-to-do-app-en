@@ -137,12 +137,20 @@ const cardRefs = useRef(new Map());
       
     <div className="controls-container">
       <button 
-        className="sound-toggle"
+        className={`sound-toggle btn-hover-effect${!soundEnabled ? ' disabled' : ''}`}
         onClick={toggleSound}
         onMouseDown={() => playSound('toggle')}
         title={soundEnabled ? t('controls.soundOff') : t('controls.soundOn')}
       >
-        {soundEnabled ? "🔊" : "🔇"}
+        <img 
+          src="/img/musical_note.png" 
+          alt="Sound" 
+          style={{ 
+            width: '20px', 
+            height: '20px',
+            filter: soundEnabled ? 'none' : 'grayscale(100%) brightness(0.5)'
+          }} 
+        />
       </button>
       <AmbientSounds />
     </div>
