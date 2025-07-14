@@ -29,6 +29,9 @@
     "soundOn": "Bật âm thanh",
     "soundOff": "Tắt âm thanh"
   },
+  "language": {
+    "selectLanguage": "Chọn Ngôn Ngữ"
+  },
   "ambient": {
     "title": "Âm Thanh Nền",
     "rain": "Mưa",

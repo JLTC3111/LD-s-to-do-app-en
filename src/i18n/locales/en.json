@@ -29,6 +29,9 @@
     "soundOn": "Enable sounds",
     "soundOff": "Disable sounds"
   },
+  "language": {
+    "selectLanguage": "Select Language"
+  },
   "ambient": {
     "title": "Ambient Sounds",
     "rain": "Rain",

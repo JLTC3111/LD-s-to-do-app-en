@@ -29,6 +29,9 @@
     "soundOn": "เปิดเสียง",
     "soundOff": "ปิดเสียง"
   },
+  "language": {
+    "selectLanguage": "เลือกภาษา"
+  },
   "footer": {
     "by": "โดย ✨ LD @",
     "github": "GitHub",

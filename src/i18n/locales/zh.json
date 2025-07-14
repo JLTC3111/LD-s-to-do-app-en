@@ -29,6 +29,9 @@
     "soundOn": "启用声音",
     "soundOff": "禁用声音"
   },
+  "language": {
+    "selectLanguage": "选择语言"
+  },
   "footer": {
     "by": "由 ✨ LD @",
     "github": "GitHub",

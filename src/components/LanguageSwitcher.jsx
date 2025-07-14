@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useState, useRef, useEffect } from 'react';
 
 export function LanguageSwitcher() {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -25,6 +25,18 @@ export function LanguageSwitcher() {
     setIsOpen(false);
   };
 
+  const handleToggleClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsOpen(!isOpen);
+  };
+
+  const handleLanguageClick = (e, lng) => {
+    e.preventDefault();
+    e.stopPropagation();
+    changeLanguage(lng);
+  };
+
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -43,8 +55,9 @@ export function LanguageSwitcher() {
     <div className="language-dropdown" ref={dropdownRef}>
       <button 
         className="language-dropdown-toggle"
-        onClick={() => setIsOpen(!isOpen)}
-        title="Select Language"
+        onClick={handleToggleClick}
+        title={t('language.selectLanguage')}
+        type="button"
       >
         <span className={`flag-icon flag-icon-${currentLanguage.flag}`}></span>
         <span className="current-language-name">{currentLanguage.name}</span>
@@ -57,7 +70,8 @@ export function LanguageSwitcher() {
             <button 
               key={lang.code}
               className={`language-option ${lang.code === i18n.language ? 'active' : ''}`}
-              onClick={() => changeLanguage(lang.code)}
+              onClick={(e) => handleLanguageClick(e, lang.code)}
+              type="button"
             >
               <span className={`flag-icon flag-icon-${lang.flag}`}></span>
               <span className="language-name">{lang.name}</span>

@@ -29,6 +29,9 @@
     "soundOn": "サウンドを有効にする",
     "soundOff": "サウンドを無効にする"
   },
+  "language": {
+    "selectLanguage": "言語を選択"
+  },
   "footer": {
     "by": "✨ LD @",
     "github": "GitHub",

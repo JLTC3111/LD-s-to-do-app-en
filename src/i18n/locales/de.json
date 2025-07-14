@@ -29,6 +29,9 @@
     "soundOn": "Töne aktivieren",
     "soundOff": "Töne deaktivieren"
   },
+  "language": {
+    "selectLanguage": "Sprache auswählen"
+  },
   "footer": {
     "by": "Von ✨ LD @",
     "github": "GitHub",

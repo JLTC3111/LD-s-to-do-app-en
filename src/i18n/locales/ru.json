@@ -29,6 +29,9 @@
     "soundOn": "Включить звуки",
     "soundOff": "Отключить звуки"
   },
+  "language": {
+    "selectLanguage": "Выбрать Язык"
+  },
   "footer": {
     "by": "От ✨ LD @",
     "github": "GitHub",
