@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 import 'react-toastify/dist/ReactToastify.css';
 import { SoundProvider, useSoundContext } from './components/SoundProvider';
 
-function AppContent() {
+function AppContent({ performanceMode, setPerformanceMode }) {
   const { t } = useTranslation();
   const { playSound, soundEnabled, toggleSound } = useSoundContext();
 
@@ -122,7 +122,12 @@ function AppContent() {
     return () => window.removeEventListener('keydown', handleUndoKey);
   }, [lastDeletedTodo, todos]);
       
-const cardRefs = useRef(new Map());
+  const cardRefs = useRef(new Map());
+
+  const togglePerformanceMode = () => {
+    setPerformanceMode(prev => prev === 'auto' ? 'low' : 'auto');
+    playSound('toggle');
+  };
 
   return (
 
@@ -152,6 +157,14 @@ const cardRefs = useRef(new Map());
           }} 
         />
       </button>
+      <button 
+        className={`performance-toggle btn-hover-effect${performanceMode === 'low' ? ' disabled' : ''}`}
+        onClick={togglePerformanceMode}
+        onMouseDown={() => playSound('toggle')}
+        title={performanceMode === 'auto' ? t('controls.performanceLow') : t('controls.performanceAuto')}
+      >
+        <span style={{ fontSize: '18px' }}>⚡</span>
+      </button>
       <AmbientSounds />
     </div>
   
@@ -167,11 +180,13 @@ const cardRefs = useRef(new Map());
 }
 
 function App() {
+  const [performanceMode, setPerformanceMode] = useState('auto');
+  
   return (
     <>
-    <Splashcursor />
+    <Splashcursor performanceMode={performanceMode} />
     <SoundProvider>
-      <AppContent /> 
+      <AppContent performanceMode={performanceMode} setPerformanceMode={setPerformanceMode} /> 
     </SoundProvider>
     </>
   );

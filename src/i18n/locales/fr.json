@@ -27,7 +27,9 @@
   },
   "controls": {
     "soundOn": "Activer les sons",
-    "soundOff": "Désactiver les sons"
+    "soundOff": "Désactiver les sons",
+    "performanceAuto": "Passer en Performance Faible",
+    "performanceLow": "Passer en Performance Automatique"
   },
   "language": {
     "selectLanguage": "Sélectionner la Langue"

@@ -27,7 +27,9 @@
   },
   "controls": {
     "soundOn": "启用声音",
-    "soundOff": "禁用声音"
+    "soundOff": "禁用声音",
+    "performanceAuto": "切换到低性能模式",
+    "performanceLow": "切换到自动性能模式"
   },
   "language": {
     "selectLanguage": "选择语言"

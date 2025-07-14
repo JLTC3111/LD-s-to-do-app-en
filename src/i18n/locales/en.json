@@ -27,7 +27,9 @@
   },
   "controls": {
     "soundOn": "Enable sounds",
-    "soundOff": "Disable sounds"
+    "soundOff": "Disable sounds",
+    "performanceAuto": "Switch to Low Performance",
+    "performanceLow": "Switch to Auto Performance"
   },
   "language": {
     "selectLanguage": "Select Language"

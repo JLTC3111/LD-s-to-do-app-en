@@ -27,7 +27,9 @@
   },
   "controls": {
     "soundOn": "Töne aktivieren",
-    "soundOff": "Töne deaktivieren"
+    "soundOff": "Töne deaktivieren",
+    "performanceAuto": "Zu Niedriger Leistung wechseln",
+    "performanceLow": "Zu Automatischer Leistung wechseln"
   },
   "language": {
     "selectLanguage": "Sprache auswählen"

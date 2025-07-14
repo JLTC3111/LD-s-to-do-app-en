@@ -27,7 +27,9 @@
   },
   "controls": {
     "soundOn": "Activar sonidos",
-    "soundOff": "Desactivar sonidos"
+    "soundOff": "Desactivar sonidos",
+    "performanceAuto": "Cambiar a Rendimiento Bajo",
+    "performanceLow": "Cambiar a Rendimiento Automático"
   },
   "language": {
     "selectLanguage": "Seleccionar Idioma"

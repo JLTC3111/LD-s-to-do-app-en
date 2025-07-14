@@ -27,7 +27,9 @@
   },
   "controls": {
     "soundOn": "サウンドを有効にする",
-    "soundOff": "サウンドを無効にする"
+    "soundOff": "サウンドを無効にする",
+    "performanceAuto": "低パフォーマンスに切り替え",
+    "performanceLow": "自動パフォーマンスに切り替え"
   },
   "language": {
     "selectLanguage": "言語を選択"

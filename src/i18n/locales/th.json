@@ -27,7 +27,9 @@
   },
   "controls": {
     "soundOn": "เปิดเสียง",
-    "soundOff": "ปิดเสียง"
+    "soundOff": "ปิดเสียง",
+    "performanceAuto": "เปลี่ยนเป็นประสิทธิภาพต่ำ",
+    "performanceLow": "เปลี่ยนเป็นประสิทธิภาพอัตโนมัติ"
   },
   "language": {
     "selectLanguage": "เลือกภาษา"

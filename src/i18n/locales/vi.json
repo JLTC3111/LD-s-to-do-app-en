@@ -27,7 +27,9 @@
   },
   "controls": {
     "soundOn": "Bật âm thanh",
-    "soundOff": "Tắt âm thanh"
+    "soundOff": "Tắt âm thanh",
+    "performanceAuto": "Chuyển sang Hiệu Suất Thấp",
+    "performanceLow": "Chuyển sang Hiệu Suất Tự Động"
   },
   "language": {
     "selectLanguage": "Chọn Ngôn Ngữ"
