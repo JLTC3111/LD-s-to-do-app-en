@@ -1,22 +1,25 @@
 'use client';
 import { useEffect, useRef } from 'react';
 
-function SplashCursor({
-  SIM_RESOLUTION = 128,
-  DYE_RESOLUTION = 1440,
-  CAPTURE_RESOLUTION = 512,
-  DENSITY_DISSIPATION = 3.5,
-  VELOCITY_DISSIPATION = 2,
-  PRESSURE = 0.1,
-  PRESSURE_ITERATIONS = 20,
-  CURL = 3,
-  SPLAT_RADIUS = 0.2,
-  SPLAT_FORCE = 6000,
-  SHADING = true,
-  COLOR_UPDATE_SPEED = 10,
-  BACK_COLOR = { r: 0.5, g: 0, b: 0 },
-  TRANSPARENT = true
-}) {
+function SplashCursor(props) {
+  const {
+    performanceMode = 'auto',
+    SIM_RESOLUTION,
+    DYE_RESOLUTION,
+    CAPTURE_RESOLUTION,
+    DENSITY_DISSIPATION,
+    VELOCITY_DISSIPATION,
+    PRESSURE,
+    PRESSURE_ITERATIONS,
+    CURL,
+    SPLAT_RADIUS,
+    SPLAT_FORCE,
+    SHADING,
+    COLOR_UPDATE_SPEED,
+    BACK_COLOR = { r: 0.5, g: 0, b: 0 },
+    TRANSPARENT = true,
+  } = props;
+
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -37,22 +40,46 @@ function SplashCursor({
     }
 
     let config = {
-      SIM_RESOLUTION,
-      DYE_RESOLUTION,
-      CAPTURE_RESOLUTION,
-      DENSITY_DISSIPATION,
-      VELOCITY_DISSIPATION,
-      PRESSURE,
-      PRESSURE_ITERATIONS,
-      CURL,
-      SPLAT_RADIUS,
-      SPLAT_FORCE,
-      SHADING,
-      COLOR_UPDATE_SPEED,
-      PAUSED: false,
+      SIM_RESOLUTION: SIM_RESOLUTION ?? 128,
+      DYE_RESOLUTION: DYE_RESOLUTION ?? 1440,
+      CAPTURE_RESOLUTION: CAPTURE_RESOLUTION ?? 512,
+      DENSITY_DISSIPATION: DENSITY_DISSIPATION ?? 3.5,
+      VELOCITY_DISSIPATION: VELOCITY_DISSIPATION ?? 2,
+      PRESSURE: PRESSURE ?? 0.1,
+      PRESSURE_ITERATIONS: PRESSURE_ITERATIONS ?? 20,
+      CURL: CURL ?? 3,
+      SPLAT_RADIUS: SPLAT_RADIUS ?? 0.2,
+      SPLAT_FORCE: SPLAT_FORCE ?? 6000,
+      SHADING: SHADING ?? true,
+      COLOR_UPDATE_SPEED: COLOR_UPDATE_SPEED ?? 10,
       BACK_COLOR,
       TRANSPARENT,
+      PAUSED: false,
     };
+
+    if (performanceMode === 'low') {
+      config = {
+        ...config,
+        SIM_RESOLUTION: 32,
+        DYE_RESOLUTION: 256,
+        CAPTURE_RESOLUTION: 128,
+        PRESSURE_ITERATIONS: 8,
+        COLOR_UPDATE_SPEED: 5,
+        SHADING: false,
+        SPLAT_FORCE: 1500,
+        SPLAT_RADIUS: 0.1,
+      };
+    } else if (performanceMode === 'auto') {
+      if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) {
+        config = {
+          ...config,
+          SIM_RESOLUTION: 64,
+          DYE_RESOLUTION: 512,
+          PRESSURE_ITERATIONS: 10,
+          SHADING: false,
+        };
+      }
+    }
 
     let pointers = [new pointerPrototype()];
 
