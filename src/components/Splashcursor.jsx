@@ -60,11 +60,12 @@ function SplashCursor(props) {
     if (performanceMode === 'low') {
       config = {
         ...config,
+        CURL: 0,
         SIM_RESOLUTION: 32,
         DYE_RESOLUTION: 256,
         CAPTURE_RESOLUTION: 128,
         PRESSURE_ITERATIONS: 8,
-        COLOR_UPDATE_SPEED: 5,
+        COLOR_UPDATE_SPEED: 0,
         SHADING: false,
         SPLAT_FORCE: 1500,
         SPLAT_RADIUS: 0.1,
@@ -1040,7 +1041,7 @@ function SplashCursor(props) {
       c.r *= 0.15;
       c.g *= 0.15;
       c.b *= 0.15;
-      return c;
+      return { r: 0.1, g: 0.1, b: 0.1 }; // makes the effect white
     }
 
     function HSVtoRGB(h, s, v) {
@@ -1217,12 +1218,18 @@ function SplashCursor(props) {
         pointerEvents: 'none',
         width: '100%',
         height: '100%',
+        mixBlendMode: 'luminosity',
+        opacity: 0.7,
+        filter: 'grayscale(1) saturate(1.5)',
       }}
     >
       <canvas
         ref={canvasRef}
         id="fluid"
         style={{
+          mixBlendMode: 'luminosity',
+          opacity: 0.7,
+          filter: 'grayscale(1) saturate(1.5)',
           width: '100vw',
           height: '100vh',
           display: 'block',
