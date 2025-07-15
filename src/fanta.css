@@ -71,6 +71,7 @@
 }
 
 body {
+    overflow-x: hidden;
     position: relative;
     cursor: url('/cursors/orange_pencil.cur'), auto;
     background: var(--background-primary);
