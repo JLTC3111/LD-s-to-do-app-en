@@ -1218,18 +1218,18 @@ function SplashCursor(props) {
         pointerEvents: 'none',
         width: '100%',
         height: '100%',
-        mixBlendMode: 'luminosity',
-        opacity: 0.7,
-        filter: 'grayscale(1) saturate(1.5)',
+        //mixBlendMode: 'luminosity',
+        //opacity: 0.7,
+        //filter: 'grayscale(1) saturate(1.5)',
       }}
     >
       <canvas
         ref={canvasRef}
         id="fluid"
         style={{
-          mixBlendMode: 'luminosity',
-          opacity: 0.7,
-          filter: 'grayscale(1) saturate(1.5)',
+          // mixBlendMode: 'luminosity',
+          // opacity: 0.7,
+          // filter: 'grayscale(1) saturate(1.5)',
           width: '100vw',
           height: '100vh',
           display: 'block',
