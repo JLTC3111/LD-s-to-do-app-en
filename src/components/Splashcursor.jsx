@@ -1041,7 +1041,7 @@ function SplashCursor(props) {
       c.r *= 0.15;
       c.g *= 0.15;
       c.b *= 0.15;
-      return { r: 0.1, g: 0.1, b: 0.1 }; // makes the effect white
+      return c; 
     }
 
     function HSVtoRGB(h, s, v) {
