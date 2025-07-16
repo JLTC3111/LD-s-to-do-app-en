@@ -16,7 +16,7 @@ import { SoundProvider, useSoundContext } from './components/SoundProvider';
 function AppContent({ performanceMode, setPerformanceMode }) {
   const { t } = useTranslation();
   const { playSound, soundEnabled, toggleSound } = useSoundContext();
-
+  const [isBot, setIsBot] = useState(false);
   const [todos, setTodos] = useState([])
   const [selectedTab, setSelectedTab] = useState('All')
   const [lastDeletedTodo, setLastDeletedTodo] = useState(null);
