@@ -129,6 +129,26 @@ function AppContent({ performanceMode, setPerformanceMode }) {
     playSound('toggle');
   };
 
+  useEffect(() => {
+    if (navigator.userAgent.includes("Headless")) {
+      setIsBot(true);
+    }
+  }, []);
+
+  if (isBot) {
+    return (
+      <img
+        src="/preview.png"
+        style={{
+          width: "100vw",
+          height: "100vh",
+          objectFit: "cover",
+        }}
+        alt="Static Preview"
+      />
+    );
+  }
+
   return (
 
     <>
@@ -181,7 +201,26 @@ function AppContent({ performanceMode, setPerformanceMode }) {
 
 function App() {
   const [performanceMode, setPerformanceMode] = useState('auto');
-  
+  const [isBot, setIsBot] = useState(false);
+  useEffect(() => {
+    if (navigator.userAgent.includes("Headless")) {
+      setIsBot(true);
+    }
+  }, []);
+
+  if (isBot) {
+    return (
+      <img
+        src="/preview.png"
+        style={{
+          width: "100vw",
+          height: "100vh",
+          objectFit: "cover",
+        }}
+        alt="Static Preview"
+      />
+    );
+  }
   return (
     <>
     <Splashcursor performanceMode={performanceMode} />
