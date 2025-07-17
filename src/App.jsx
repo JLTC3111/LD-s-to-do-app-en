@@ -211,7 +211,7 @@ function App() {
   if (isBot) {
     return (
       <img
-        src="/preview.png"
+        src="/preview.jpg"
         style={{
           width: "100vw",
           height: "100vh",
