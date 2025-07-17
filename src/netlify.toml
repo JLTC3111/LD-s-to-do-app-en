@@ -1,0 +1,17 @@
+# netlify.toml
+
+[[redirects]]
+  from = "/"               # Match your root URL
+  to = "/preview.jpg"      # Serve this image instead
+  status = 200             # OK, not a redirect
+  force = true             # Even if "/" exists, do this anyway
+  conditions = { 
+    User-Agent = [
+      "HeadlessChrome", 
+      "*bot*", 
+      "*preview*", 
+      "*Slackbot*", 
+      "*Twitterbot*", 
+      "*LinkedInBot*"
+    ]
+  }
