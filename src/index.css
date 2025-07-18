@@ -727,8 +727,6 @@ footer {
     font-size: 16px;
   }
 
-
-
   .ambient-toggle {
     width: 35px;
     height: 35px;
@@ -745,7 +743,7 @@ footer {
 
   .ambient-menu {
     min-width: 160px;
-    right: -10px;
+    right: -120px;
   }
 
 .flag-link {
