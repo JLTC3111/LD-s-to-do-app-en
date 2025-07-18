@@ -109,7 +109,7 @@ export function AmbientSounds() {
               className="stop-ambient"
               title={t('ambient.stopAll')}
             >
-              ⏹️
+              <img src="/img/music_stop.png" alt="Stop" style={{ width: '25px', height: '25px' }} />
             </button>
           </div>
           

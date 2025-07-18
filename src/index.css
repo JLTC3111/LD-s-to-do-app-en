@@ -543,13 +543,13 @@ footer {
 .ambient-menu {
   position: absolute;
   top: 100%;
-  right: 0;
-  background: rgba(255, 255, 255, 0.95);
+  margin-left: auto;
+  background: transparent;
   backdrop-filter: blur(10px);
   border-radius: 8px;
   padding: 12px;
   margin-top: 8px;
-  min-width: 180px;
+  min-width: 140px;
   animation: dropdownFadeIn 0.3s ease;
   z-index: 1000;
   display: flex;
@@ -562,8 +562,8 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 8px;
-  padding-bottom: 8px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
   width: 100%;
 }
 
@@ -571,16 +571,17 @@ footer {
   margin: 0;
   font-size: 14px;
   color: #333;
+  font-weight: 500;
 }
 
 .stop-ambient {
-  background: none;
-  border: none;
+  background: none !important;
+  border: none !important;
   cursor: pointer;
-  font-size: 16px;
-  padding: 4px;
-  border-radius: 4px;
-  transition: all 0.2s ease;
+  font-size: 0px;
+  padding: 0;
+  border-radius: 16px;
+  transition: all 0.3s ease;
 }
 
 .stop-ambient:hover {
@@ -588,18 +589,19 @@ footer {
 }
 
 .ambient-option {
+  background: transparent;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   width: 100%;
-  padding: 8px 12px;
+  padding: 4px 8px;
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
   cursor: pointer;
   transition: all 0.2s ease;
   color: #333;
-  font-size: 13px;
+  font-size: 12px;
   text-align: left;
   border-radius: 4px;
 }
@@ -611,7 +613,7 @@ footer {
 }
 
 .ambient-option:hover {
-  background: rgba(0, 0, 0, 0.05);
+  background: transparent;
 }
 
 .ambient-option.active {
