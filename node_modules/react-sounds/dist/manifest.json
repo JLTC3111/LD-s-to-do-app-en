@@ -1,0 +1,293 @@
+{
+  "version": "1.0.0",
+  "sounds": {
+    "ambient/campfire": {
+      "src": "ambient/campfire.eb676cb.mp3",
+      "duration": 22.047313
+    },
+    "ambient/heartbeat": {
+      "src": "ambient/heartbeat.3680f81.mp3",
+      "duration": 22.047313
+    },
+    "ambient/rain": {
+      "src": "ambient/rain.96a6bc5.mp3",
+      "duration": 22.047313
+    },
+    "ambient/water_stream": {
+      "src": "ambient/water_stream.9383548.mp3",
+      "duration": 22.047313
+    },
+    "ambient/wind": {
+      "src": "ambient/wind.13b95c3.mp3",
+      "duration": 22.047313
+    },
+    "arcade/coin": {
+      "src": "arcade/coin.5ec00e3.mp3",
+      "duration": 0.862
+    },
+    "arcade/coin_bling": {
+      "src": "arcade/coin_bling.e7e6644.mp3",
+      "duration": 0.862
+    },
+    "arcade/jump": {
+      "src": "arcade/jump.6baf978.mp3",
+      "duration": 0.862
+    },
+    "arcade/level_down": {
+      "src": "arcade/level_down.7f42195.mp3",
+      "duration": 1.123265
+    },
+    "arcade/level_up": {
+      "src": "arcade/level_up.0aba301.mp3",
+      "duration": 1.48898
+    },
+    "arcade/power_down": {
+      "src": "arcade/power_down.222ab81.mp3",
+      "duration": 1.071
+    },
+    "arcade/power_up": {
+      "src": "arcade/power_up.bcafcc5.mp3",
+      "duration": 1.071
+    },
+    "arcade/upgrade": {
+      "src": "arcade/upgrade.1da1db4.mp3",
+      "duration": 0.862
+    },
+    "game/coin": {
+      "src": "game/coin.21575b3.mp3",
+      "duration": 0.914286
+    },
+    "game/hit": {
+      "src": "game/hit.7f64763.mp3",
+      "duration": 0.313469
+    },
+    "game/miss": {
+      "src": "game/miss.b1d5a19.mp3",
+      "duration": 0.287347
+    },
+    "game/portal_closing": {
+      "src": "game/portal_closing.f434407.mp3",
+      "duration": 2.08975
+    },
+    "game/portal_opening": {
+      "src": "game/portal_opening.54935de.mp3",
+      "duration": 3.474286
+    },
+    "game/void": {
+      "src": "game/void.ab99118.mp3",
+      "duration": 0.862
+    },
+    "misc/silence": {
+      "src": "misc/silence.01e0b9b.mp3",
+      "duration": 1.152
+    },
+    "notification/completed": {
+      "src": "notification/completed.31e527e.mp3",
+      "duration": 0.862
+    },
+    "notification/error": {
+      "src": "notification/error.b92d3c6.mp3",
+      "duration": 0.548563
+    },
+    "notification/info": {
+      "src": "notification/info.fc3baa4.mp3",
+      "duration": 0.862
+    },
+    "notification/message": {
+      "src": "notification/message.1eefe18.mp3",
+      "duration": 0.862
+    },
+    "notification/notification": {
+      "src": "notification/notification.595d086.mp3",
+      "duration": 0.862
+    },
+    "notification/popup": {
+      "src": "notification/popup.cf74b54.mp3",
+      "duration": 0.313469
+    },
+    "notification/reminder": {
+      "src": "notification/reminder.6d68587.mp3",
+      "duration": 0.862
+    },
+    "notification/success": {
+      "src": "notification/success.f38c2ed.mp3",
+      "duration": 1.227755
+    },
+    "notification/warning": {
+      "src": "notification/warning.207aed9.mp3",
+      "duration": 0.862
+    },
+    "system/boot_down": {
+      "src": "system/boot_down.7baf040.mp3",
+      "duration": 1.593469
+    },
+    "system/boot_up": {
+      "src": "system/boot_up.7369806.mp3",
+      "duration": 3.134694
+    },
+    "system/device_connect": {
+      "src": "system/device_connect.e609d62.mp3",
+      "duration": 0.862
+    },
+    "system/device_disconnect": {
+      "src": "system/device_disconnect.bd814fa.mp3",
+      "duration": 0.862
+    },
+    "system/lock": {
+      "src": "system/lock.4063aab.mp3",
+      "duration": 0.862
+    },
+    "system/screenshot": {
+      "src": "system/screenshot.f3483cb.mp3",
+      "duration": 0.235102
+    },
+    "system/trash": {
+      "src": "system/trash.ed51a4e.mp3",
+      "duration": 0.862
+    },
+    "ui/blocked": {
+      "src": "ui/blocked.be40409.mp3",
+      "duration": 0.940408
+    },
+    "ui/button_hard": {
+      "src": "ui/button_hard.011f516.mp3",
+      "duration": 0.835918
+    },
+    "ui/button_hard_double": {
+      "src": "ui/button_hard_double.2c7e778.mp3",
+      "duration": 0.862
+    },
+    "ui/button_medium": {
+      "src": "ui/button_medium.f1076ea.mp3",
+      "duration": 0.862
+    },
+    "ui/button_soft": {
+      "src": "ui/button_soft.896771c.mp3",
+      "duration": 0.862
+    },
+    "ui/button_soft_double": {
+      "src": "ui/button_soft_double.ef0aec4.mp3",
+      "duration": 0.862
+    },
+    "ui/button_squishy": {
+      "src": "ui/button_squishy.69c5c9a.mp3",
+      "duration": 0.391837
+    },
+    "ui/buzz": {
+      "src": "ui/buzz.6d6857f.mp3",
+      "duration": 0.548563
+    },
+    "ui/buzz_deep": {
+      "src": "ui/buzz_deep.c1f597f.mp3",
+      "duration": 0.809796
+    },
+    "ui/buzz_long": {
+      "src": "ui/buzz_long.d506d81.mp3",
+      "duration": 1.071
+    },
+    "ui/copy": {
+      "src": "ui/copy.4aadb27.mp3",
+      "duration": 0.130612
+    },
+    "ui/input_blur": {
+      "src": "ui/input_blur.607531b.mp3",
+      "duration": 0.862
+    },
+    "ui/input_focus": {
+      "src": "ui/input_focus.80b402e.mp3",
+      "duration": 0.287347
+    },
+    "ui/item_deselect": {
+      "src": "ui/item_deselect.9955ec7.mp3",
+      "duration": 0.862
+    },
+    "ui/item_select": {
+      "src": "ui/item_select.5d88832.mp3",
+      "duration": 0.862
+    },
+    "ui/keystroke_hard": {
+      "src": "ui/keystroke_hard.6d8eb42.mp3",
+      "duration": 0.548563
+    },
+    "ui/keystroke_medium": {
+      "src": "ui/keystroke_medium.2b4ae6c.mp3",
+      "duration": 0.548563
+    },
+    "ui/keystroke_soft": {
+      "src": "ui/keystroke_soft.fcd4503.mp3",
+      "duration": 0.548563
+    },
+    "ui/panel_collapse": {
+      "src": "ui/panel_collapse.1b8441f.mp3",
+      "duration": 0.862
+    },
+    "ui/panel_expand": {
+      "src": "ui/panel_expand.ef3ca39.mp3",
+      "duration": 0.862
+    },
+    "ui/pop_close": {
+      "src": "ui/pop_close.1f2dc35.mp3",
+      "duration": 0.809796
+    },
+    "ui/pop_open": {
+      "src": "ui/pop_open.360c640.mp3",
+      "duration": 0.835918
+    },
+    "ui/popup_close": {
+      "src": "ui/popup_close.1bd2a1b.mp3",
+      "duration": 1.071
+    },
+    "ui/popup_open": {
+      "src": "ui/popup_open.97597a8.mp3",
+      "duration": 1.071
+    },
+    "ui/radio_select": {
+      "src": "ui/radio_select.4fbe4e3.mp3",
+      "duration": 0.862
+    },
+    "ui/send": {
+      "src": "ui/send.396090f.mp3",
+      "duration": 0.182857
+    },
+    "ui/submit": {
+      "src": "ui/submit.1e228b1.mp3",
+      "duration": 0.548563
+    },
+    "ui/success_bling": {
+      "src": "ui/success_bling.3f44a2f.mp3",
+      "duration": 0.809796
+    },
+    "ui/success_blip": {
+      "src": "ui/success_blip.911b304.mp3",
+      "duration": 0.626939
+    },
+    "ui/success_chime": {
+      "src": "ui/success_chime.436ed4a.mp3",
+      "duration": 1.619592
+    },
+    "ui/tab_close": {
+      "src": "ui/tab_close.3c1a646.mp3",
+      "duration": 0.548563
+    },
+    "ui/tab_open": {
+      "src": "ui/tab_open.3745bcd.mp3",
+      "duration": 0.548563
+    },
+    "ui/toggle_off": {
+      "src": "ui/toggle_off.7103845.mp3",
+      "duration": 0.261224
+    },
+    "ui/toggle_on": {
+      "src": "ui/toggle_on.2f87bf7.mp3",
+      "duration": 0.287347
+    },
+    "ui/window_close": {
+      "src": "ui/window_close.0e958da.mp3",
+      "duration": 0.548563
+    },
+    "ui/window_open": {
+      "src": "ui/window_open.7478756.mp3",
+      "duration": 0.548563
+    }
+  }
+}
