@@ -186,46 +186,47 @@ function AppContent({ performanceMode, setPerformanceMode }) {
         <span style={{ fontSize: '18px' }}>⚡</span>
       </button>
       <AmbientSounds />
-    </div>
-  
-    <div className="video-background">
-     <video className="video-bg" autoPlay loop muted playsInline>
-       <source src="/bg-video.mp4" type="video/mp4" />
-     </video>
-    </div>
-    <ToastContainer position="bottom-center" autoClose={2500} hideProgressBar />
-    <Footer />
-    </>
-  )
-}
+          </div>
+        
+          <div className="video-background">
+          <video className="video-bg" autoPlay loop muted playsInline>
+            <source src="/bg-video.mp4" type="video/mp4" />
+          </video>
+          </div>
+          <ToastContainer position="bottom-center" autoClose={2500} hideProgressBar />
+          <Footer />
+          </>
+        )
+      }
 
-function App() {
-  const [performanceMode, setPerformanceMode] = useState('auto');
-  const [isBot, setIsBot] = useState(false);
-  useEffect(() => {
-    if (navigator.userAgent.includes("Headless")) {
-      setIsBot(true);
-    }
-  }, []);
+      function App() {
+        const [performanceMode, setPerformanceMode] = useState('auto');
+        const [isBot, setIsBot] = useState(false);
+        useEffect(() => {
+          if (navigator.userAgent.includes("Headless")) {
+            setIsBot(true);
+          }
+        }, []);
 
-  if (isBot) {
-    return (
-      <img
-        src="/preview.jpg"
-        style={{
-          width: "100vw",
-          height: "100vh",
-          objectFit: "cover",
-        }}
-        alt="Static Preview"
-      />
-    );
-  }
+        if (isBot) {
+          return (
+            <img
+              src="/preview.jpg"
+              style={{
+                width: "100vw",
+                height: "100vh",
+                objectFit: "cover",
+              }}
+              alt="Static Preview"
+            />
+          );
+        }
+
   return (
     <>
     <Splashcursor performanceMode={performanceMode} />
     <SoundProvider>
-      <AppContent performanceMode={performanceMode} setPerformanceMode={setPerformanceMode} /> 
+    <AppContent performanceMode={performanceMode} setPerformanceMode={setPerformanceMode} /> 
     </SoundProvider>
     </>
   );
