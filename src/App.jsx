@@ -224,7 +224,7 @@ function AppContent({ performanceMode, setPerformanceMode }) {
 
   return (
     <>
-    <Splashcursor performanceMode={performanceMode} />
+    {/*<Splashcursor performanceMode={performanceMode} />*/}
     <SoundProvider>
     <AppContent performanceMode={performanceMode} setPerformanceMode={setPerformanceMode} /> 
     </SoundProvider>
