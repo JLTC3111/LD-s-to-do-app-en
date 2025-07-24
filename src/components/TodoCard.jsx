@@ -124,7 +124,7 @@ export function TodoCard(props) {
             <h6>{t('todo.delete')}</h6>
             </button>
 
-            <button onClick={() => setIsEditing(true)} disabled={todo.complete} onMouseDown={() => playSound('button')} onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave}>
+            <button onClick={() => setIsEditing(true)} onMouseDown={() => playSound('button')} onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave}>
               <h6>{t('todo.edit')}</h6>
             </button>
              
