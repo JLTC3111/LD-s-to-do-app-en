@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { useState, useRef, useEffect } from 'react';
+import { Sun, MoonStar, ChevronDownIcon } from 'lucide-react';
 
 export function LanguageSwitcher() {
   const { i18n, t } = useTranslation();
@@ -7,15 +8,15 @@ export function LanguageSwitcher() {
   const dropdownRef = useRef(null);
 
   const languages = [
-    { code: 'en', flag: 'gb', name: 'English' },
-    { code: 'vi', flag: 'vn', name: 'Tiếng Việt' },
-    { code: 'ru', flag: 'ru', name: 'Русский' },
-    { code: 'fr', flag: 'fr', name: 'Français' },
-    { code: 'de', flag: 'de', name: 'Deutsch' },
-    { code: 'es', flag: 'es', name: 'Español' },
-    { code: 'ja', flag: 'jp', name: '日本語' },
-    { code: 'zh', flag: 'cn', name: '中文' },
-    { code: 'th', flag: 'th', name: 'ไทย' }
+    { code: 'en', flag: '/flags/gb.svg', name: 'English', label: 'English' },
+    { code: 'vi', flag: '/flags/vn.svg', name: 'Tiếng Việt', label: 'Tiếng Việt' },
+    { code: 'ru', flag: '/flags/ru.svg', name: 'Русский', label: 'Русский' },
+    { code: 'fr', flag: '/flags/fr.svg', name: 'Français', label: 'Français' },
+    { code: 'de', flag: '/flags/de.svg', name: 'Deutsch', label: 'Deutsch' },
+    { code: 'es', flag: '/flags/es.svg', name: 'Español', label: 'Español' },
+    { code: 'ja', flag: '/flags/jp.svg', name: '日本語', label: '日本語' },
+    { code: 'zh', flag: '/flags/cn.svg', name: '中文', label: '中文' },
+    { code: 'th', flag: '/flags/th.svg', name: 'ไทย', label: 'ไทย' }
   ];
 
   const currentLanguage = languages.find(lang => lang.code === i18n.language) || languages[0];
@@ -59,9 +60,15 @@ export function LanguageSwitcher() {
         title={t('language.selectLanguage')}
         type="button"
       >
-        <span className={`flag-icon flag-icon-${currentLanguage.flag}`}></span>
-        <span className="current-language-name">{currentLanguage.name}</span>
-        <span className="dropdown-arrow">▼</span>
+        <span style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%' }}>
+          <img 
+            src={languages.find(l => l.code === i18n.language)?.flag}
+            alt={languages.find(l => l.code === i18n.language)?.label}
+            style={{ width: '1.25em', height: '1.25em', objectFit: 'contain' }}
+          />
+          <span style={{ flexGrow: 1 }}>{languages.find(l => l.code === i18n.language)?.label}</span>
+          <ChevronDownIcon size={16} />
+        </span>
       </button>
       
       {isOpen && (
@@ -73,8 +80,12 @@ export function LanguageSwitcher() {
               onClick={(e) => handleLanguageClick(e, lang.code)}
               type="button"
             >
-              <span className={`flag-icon flag-icon-${lang.flag}`}></span>
-              <span className="language-name">{lang.name}</span>
+              <img 
+                src={lang.flag} 
+                alt={lang.label} 
+                style={{ width: '1.5em', height: '1.5em', objectFit: 'contain' }}
+              />
+              <span>{lang.label}</span>
             </button>
           ))}
         </div>

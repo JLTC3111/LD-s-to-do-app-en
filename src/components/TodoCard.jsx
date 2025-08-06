@@ -1,7 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslation } from 'react-i18next';
 import { useSoundContext } from './SoundProvider';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function TodoCard(props) {
   const { t } = useTranslation();
@@ -16,11 +19,27 @@ export function TodoCard(props) {
     if (cardRef.current) {
       gsap.fromTo(
         cardRef.current,
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }
+        { 
+          opacity: 0, 
+          y: 40,
+          scale: 0.95 
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          ease: "back.out(1.2)",
+          scrollTrigger: {
+            trigger: cardRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none"
+          },
+          delay: Math.min(0.1 * todoId, 0.5) // Staggered delay up to 0.5s
+        }
       );
     }
-  }, []);
+  }, [todoId]);
 
   function saveEdit() {
     if (!editedText.trim()) {
@@ -82,7 +101,10 @@ export function TodoCard(props) {
   };
 
   return (
-    <div ref={cardRef} className={`card todo-item ${todo.complete ? 'completed-task' : ''}`}>
+    <div 
+      ref={cardRef} 
+      className={`card todo-item ${todo.complete ? 'completed-task' : ''}`}
+    >
       {isEditing ? (
         <textarea
           value={editedText}
