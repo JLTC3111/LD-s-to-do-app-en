@@ -139,7 +139,7 @@ function AppContent({ performanceMode, setPerformanceMode }) {
 
   useEffect(() => {
     AOS.init({
-      duration: 600,
+      duration: 750,
       once: false,
       mirror: false,
       easing: 'ease-out-cubic',

@@ -56,6 +56,16 @@ body {
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+[data-aos] {
+  will-change: transform, opacity;
+  transition-property: opacity, transform;
+  transition-duration: 0.85s;
+}
+
 h1 {
   width: fit-content;
 }
@@ -256,6 +266,10 @@ hr {
   gap: 2.5rem;
   z-index: 5;
   margin-bottom: 5px;
+}
+
+.todo-buttons button {
+  transition: all 0.3s ease;
 }
 
 .todo-buttons button:hover {
