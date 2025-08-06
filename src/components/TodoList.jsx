@@ -1,7 +1,10 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import { TodoCard } from "./TodoCard";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export function TodoList(props) {
   const {
@@ -25,20 +28,40 @@ export function TodoList(props) {
       : todos.filter((val) => !val.complete);
 
       useEffect(() => {
-        if (listRef.current && listRef.current.children.length > 0) {
-          gsap.fromTo(
-            listRef.current.children,
-            { opacity: 0, y: 50 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.6,
-              stagger: 0.15,
-              ease: "power2.out"
-            }
-          );
-        }
-      }, [todos]); // ✅ better to depend on full todos array!
+    // Kill any existing animations on the list items
+    if (listRef.current) {
+      gsap.killTweensOf(listRef.current.children);
+      
+      // Reset all children to initial state
+      gsap.set(listRef.current.children, {
+        opacity: 0,
+        y: 50,
+        clearProps: 'transform,opacity'
+      });
+      
+      // Create a new animation for visible items
+      if (listRef.current.children.length > 0) {
+        gsap.to(listRef.current.children, {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          stagger: 0.2,
+          ease: 'power2.out',
+          onComplete: () => {
+            // Ensure all items are fully visible after animation
+            gsap.set(listRef.current.children, { clearProps: 'all' });
+          }
+        });
+      }
+    }
+    
+    // Refresh ScrollTrigger after the animation completes
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 25);
+    
+    return () => clearTimeout(timer);
+  }, [todos, selectedTab]); // Also watch for tab changes
 
   const onDragEnd = (result) => {
     if (!result.destination) return;

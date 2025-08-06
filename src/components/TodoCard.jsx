@@ -19,9 +19,87 @@ export function TodoCard(props) {
     if (!cardRef.current) return;
     
     const card = cardRef.current;
-    let ctx = gsap.context(() => {
+    let ctx;
+    let scrollTriggerInstance;
+    
+    // Initial setup
+    const setupAnimations = () => {
+      // Kill any existing ScrollTrigger to prevent duplicates
+      ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.trigger === card) trigger.kill();
+      });
+      
+      // Reset any transforms that might be left over
+      gsap.set(card, { clearProps: "transform,opacity,scale" });
+      
       // Initial animation (entering from left)
-      gsap.fromTo(card,
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: card,
+          start: "top 97.5%",
+          end: "bottom 0.5%",
+          toggleActions: "play none reverse none",
+          onEnter: () => {
+            // Only animate if the card is not already visible
+            if (parseFloat(card.style.opacity) < 1) {
+              gsap.to(card, {
+                opacity: 1,
+                x: 0,
+                scale: 1,
+                duration: 0.6,
+                ease: "back.out(1.2)",
+                clearProps: "all"
+              });
+            }
+          },
+          onLeave: () => {
+            // Only animate if we're actually scrolling down past this card
+            if (window.scrollY > card.offsetTop) {
+              gsap.to(card, {
+                opacity: 0,
+                x: -400,
+                scale: 0.95,
+                duration: 0.6,
+                ease: "back.in(1.2)",
+                onComplete: () => {
+                  // Only reset position if still not visible
+                  if (parseFloat(card.style.opacity) === 0) {
+                    gsap.set(card, { x: 0 });
+                  }
+                }
+              });
+            }
+          },
+          onEnterBack: () => {
+            gsap.to(card, {
+              opacity: 1,
+              x: 0,
+              scale: 1,
+              duration: 0.6,
+              ease: "back.out(1.2)",
+              clearProps: "all"
+            });
+          },
+          onLeaveBack: () => {
+            gsap.to(card, {
+              opacity: 0,
+              x: 400,
+              scale: 0.95,
+              duration: 0.6,
+              ease: "back.in(1.2)",
+              onComplete: () => {
+                // Only reset position if still not visible
+                if (parseFloat(card.style.opacity) === 0) {
+                  gsap.set(card, { x: 0 });
+                }
+              }
+            });
+          }
+        }
+      });
+      
+      // Initial animation
+      tl.fromTo(card,
         { 
           opacity: 0, 
           x: -400,
@@ -33,62 +111,44 @@ export function TodoCard(props) {
           scale: 1,
           duration: 0.6,
           ease: "back.out(1.2)",
-          scrollTrigger: {
-            trigger: card,
-            start: "top 97.5%",
-            end: "bottom 0.5%",
-            toggleActions: "play none reverse none",
-            onEnter: () => {
-              // When scrolling down into view
-              gsap.to(card, {
-                opacity: 1,
-                x: 0,
-                scale: 1,
-                duration: 0.6,
-                ease: "back.out(1.2)",
-                clearProps: "all"
-              });
-            },
-            onLeave: () => {
-              // When scrolling down past the card
-              if (window.scrollY > card.offsetTop) {
-                gsap.to(card, {
-                  opacity: 0,
-                  x: -400,
-                  scale: 0.95,
-                  duration: 0.6,
-                  ease: "back.in(1.2)"
-                });
-              }
-            },
-            onEnterBack: () => {
-              // When scrolling up into view
-              gsap.to(card, {
-                opacity: 1,
-                x: 0,
-                scale: 1,
-                duration: 0.6,
-                ease: "back.out(1.2)",
-                clearProps: "all"
-              });
-            },
-            onLeaveBack: () => {
-              // When scrolling up past the card
-              gsap.to(card, {
-                opacity: 0,
-                x: 400,
-                scale: 0.95,
-                duration: 0.6,
-                ease: "back.in(1.2)"
-              });
-            }
-          },
           delay: Math.min(0.1 * todoId, 0.25)
         }
       );
-    }, card);
-
-    return () => ctx.revert(); // Cleanup
+      
+      return tl;
+    };
+    
+    // Set up the initial animations
+    ctx = gsap.context(setupAnimations, card);
+    
+    // Function to refresh ScrollTrigger after tab changes
+    const refreshScrollTrigger = () => {
+      // Small delay to ensure DOM is updated
+      requestAnimationFrame(() => {
+        ScrollTrigger.refresh();
+        // Reset card to visible state
+        gsap.set(card, { opacity: 1, x: 0, scale: 1 });
+      });
+    };
+    
+    // Set up a mutation observer to detect when the card becomes visible again
+    const observer = new MutationObserver(refreshScrollTrigger);
+    if (card.parentElement) {
+      observer.observe(card.parentElement, { childList: true, subtree: true });
+    }
+    
+    // Also refresh on window resize
+    window.addEventListener('resize', refreshScrollTrigger);
+    
+    return () => {
+      // Cleanup
+      if (ctx) ctx.revert();
+      observer.disconnect();
+      window.removeEventListener('resize', refreshScrollTrigger);
+      ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.trigger === card) trigger.kill();
+      });
+    };
   }, [todoId]);
 
   function saveEdit() {
@@ -115,10 +175,12 @@ export function TodoCard(props) {
 
   function handleDelete() {
     gsap.to(cardRef.current, {
+      y: 100,
+      height: 0,
+      margin: 0,
       opacity: 0,
-      y: 40,
-      duration: 0.5,
-      ease: "power2.inout",
+      duration: 0.25,
+      ease: "power2.out",
       onComplete: () => handleDeleteTodo(todoId),
     });
   }
@@ -126,8 +188,10 @@ export function TodoCard(props) {
   function handleComplete() {
     gsap.to(cardRef.current, {
       y: 100,
+      height: 0,
+      margin: 0,
       opacity: 0,
-      duration: 0.5,
+      duration: 0.25,
       ease: "power2.out",
       onComplete: () => handleCompleteTodo(todoId),
     });
@@ -136,7 +200,7 @@ export function TodoCard(props) {
   function handleEdit() {
     playSound('miss');
     gsap.to(cardRef.current, {
-      duration: 0.5,
+      duration: 0.25,
       ease: "power1.out"
     });
     handleEditTodo(todoId);
@@ -199,8 +263,6 @@ export function TodoCard(props) {
             <button onClick={() => setIsEditing(true)} onMouseDown={() => playSound('button')} onMouseEnter={handleButtonHover} onMouseLeave={handleButtonLeave}>
               <h6>{t('todo.edit')}</h6>
             </button>
-             
-              
           </>
         )}
       </div>
