@@ -37,17 +37,46 @@ export function TodoCard(props) {
         scrollTrigger: {
           trigger: card,
           start: "top 97.5%",
-          end: "bottom 0.5%",
+          end: "bottom 2.5%",
           toggleActions: "play none reverse none",
+          // Enable animations on both forward and backward scrolls
+          onUpdate: (self) => {
+            // When scrolling down past the card
+            if (self.direction === 1 && self.progress > 0.95) {
+              gsap.to(card, {
+                opacity: 0,
+                y: 50,
+                scale: 1,
+                duration: 0.3,
+                ease: "power2.inOut",
+                onComplete: () => {
+                  if (parseFloat(card.style.opacity) === 0) {
+                    gsap.set(card, { y: 0 });
+                  }
+                }
+              });
+            }
+            // When scrolling up past the card
+            else if (self.direction === -1 && self.progress < 0.95) {
+              gsap.to(card, {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.25,
+                ease: "power2.out",
+                clearProps: "all"
+              });
+            }
+          },
           onEnter: () => {
             // Only animate if the card is not already visible
             if (parseFloat(card.style.opacity) < 1) {
               gsap.to(card, {
                 opacity: 1,
-                x: 0,
+                y: 0,
                 scale: 1,
-                duration: 0.6,
-                ease: "back.out(1.2)",
+                duration: 0.25,
+                ease: "power2.out",
                 clearProps: "all"
               });
             }
@@ -57,14 +86,14 @@ export function TodoCard(props) {
             if (window.scrollY > card.offsetTop) {
               gsap.to(card, {
                 opacity: 0,
-                x: -400,
-                scale: 0.95,
+                y: 50,
+                scale: 1,
                 duration: 0.6,
                 ease: "back.in(1.2)",
                 onComplete: () => {
                   // Only reset position if still not visible
                   if (parseFloat(card.style.opacity) === 0) {
-                    gsap.set(card, { x: 0 });
+                    gsap.set(card, { y: 0 });
                   }
                 }
               });
@@ -73,7 +102,7 @@ export function TodoCard(props) {
           onEnterBack: () => {
             gsap.to(card, {
               opacity: 1,
-              x: 0,
+              y: 0,
               scale: 1,
               duration: 0.6,
               ease: "back.out(1.2)",
@@ -83,14 +112,14 @@ export function TodoCard(props) {
           onLeaveBack: () => {
             gsap.to(card, {
               opacity: 0,
-              x: 400,
-              scale: 0.95,
+              y: 50,
+              scale: 1,
               duration: 0.6,
               ease: "back.in(1.2)",
               onComplete: () => {
                 // Only reset position if still not visible
                 if (parseFloat(card.style.opacity) === 0) {
-                  gsap.set(card, { x: 0 });
+                  gsap.set(card, { y: 0 });
                 }
               }
             });
@@ -102,12 +131,12 @@ export function TodoCard(props) {
       tl.fromTo(card,
         { 
           opacity: 0, 
-          x: -400,
-          scale: 0.95 
+          y: 50,
+          scale: 1 
         },
         {
           opacity: 1,
-          x: 0,
+          y: 0,
           scale: 1,
           duration: 0.6,
           ease: "back.out(1.2)",
@@ -127,7 +156,7 @@ export function TodoCard(props) {
       requestAnimationFrame(() => {
         ScrollTrigger.refresh();
         // Reset card to visible state
-        gsap.set(card, { opacity: 1, x: 0, scale: 1 });
+        gsap.set(card, { opacity: 1, y: 0, scale: 1 });
       });
     };
     

@@ -27,41 +27,76 @@ export function TodoList(props) {
       ? todos.filter((val) => val.complete)
       : todos.filter((val) => !val.complete);
 
-      useEffect(() => {
-    // Kill any existing animations on the list items
-    if (listRef.current) {
-      gsap.killTweensOf(listRef.current.children);
-      
-      // Reset all children to initial state
-      gsap.set(listRef.current.children, {
-        opacity: 0,
-        y: 50,
-        clearProps: 'transform,opacity'
-      });
-      
-      // Create a new animation for visible items
-      if (listRef.current.children.length > 0) {
-        gsap.to(listRef.current.children, {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          stagger: 0.2,
-          ease: 'power2.out',
-          onComplete: () => {
-            // Ensure all items are fully visible after animation
-            gsap.set(listRef.current.children, { clearProps: 'all' });
-          }
-        });
-      }
-    }
+  // Set up scroll animations for all cards in the list
+  useEffect(() => {
+    if (!listRef.current) return;
     
-    // Refresh ScrollTrigger after the animation completes
+    // Kill all existing ScrollTriggers and animations
+    gsap.killTweensOf(listRef.current.children);
+    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    
+    const cards = Array.from(listRef.current.children);
+    if (cards.length === 0) return;
+    
+    // Set initial state
+    gsap.set(cards, { 
+      opacity: 0,
+      y: 20,
+      clearProps: 'all'
+    });
+    
+    // Force a reflow
+    listRef.current.offsetHeight;
+    
+    // Simple fade in animation
+    const tl = gsap.timeline({
+      onComplete: () => {
+        // Refresh ScrollTrigger after animations complete
+        setTimeout(() => ScrollTrigger.refresh(true), 50);
+      }
+    });
+    
+    tl.to(cards, {
+      opacity: 1,
+      y: 0,
+      duration: 0.3,
+      stagger: 0.05,
+      ease: 'power2.out'
+    });
+    
+    // Set up scroll triggers
+    cards.forEach(card => {
+      if (!card) return;
+      
+      ScrollTrigger.create({
+        trigger: card,
+        start: 'top 90%',
+        end: 'bottom 10%',
+        onEnter: () => gsap.to(card, { opacity: 1, y: 0, duration: 0.3, clearProps: 'all' }),
+        onLeave: () => {},
+        onEnterBack: () => gsap.to(card, { opacity: 1, y: 0, duration: 0.3, clearProps: 'all' }),
+        onLeaveBack: () => {}
+      });
+    });
+    
+    return () => {
+      tl.kill();
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, [filteredTodos]); // Only depend on filteredTodos
+
+  useEffect(() => {
+    // Initial ScrollTrigger refresh
     const timer = setTimeout(() => {
-      ScrollTrigger.refresh();
+      ScrollTrigger.refresh(true);
     }, 25);
     
-    return () => clearTimeout(timer);
-  }, [todos, selectedTab]); // Also watch for tab changes
+    return () => {
+      clearTimeout(timer);
+      // Clean up any pending animations
+      gsap.globalTimeline.clear();
+    };
+  }, [todos, selectedTab]);
 
   const onDragEnd = (result) => {
     if (!result.destination) return;
@@ -103,28 +138,28 @@ export function TodoList(props) {
             listRef.current = el;
           }}>
             {filteredTodos.map((todo, index) => (
-  <Draggable key={todo.id} draggableId={String(todo.id)} index={index}>
-    {(provided) => (
-      <div
-        ref={provided.innerRef}
-        {...provided.draggableProps}
-        {...provided.dragHandleProps}
-      >
-        <TodoCard
-          todo={todo}
-          todoId={todo.id} 
-          handleEditTodo={handleEditTodo}
-          cardRef={el => cardRefs.current.set(todo.id, el)}
-          handleDeleteTodo={handleDeleteTodo}
-          handleCompleteTodo={() => handleCompleteTodo(todo.id)}
-          setSelectedTab={setSelectedTab}
-        />
-      </div>
-    )}
-  </Draggable>
-))}
-            {provided.placeholder}
-          </div>
+    <Draggable key={todo.id} draggableId={String(todo.id)} index={index}>
+      {(provided) => (
+        <div
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
+          <TodoCard
+            todo={todo}
+            todoId={todo.id} 
+            handleEditTodo={handleEditTodo}
+            cardRef={el => cardRefs.current.set(todo.id, el)}
+            handleDeleteTodo={handleDeleteTodo}
+            handleCompleteTodo={() => handleCompleteTodo(todo.id)}
+            setSelectedTab={setSelectedTab}
+          />
+        </div>
+      )}
+    </Draggable>
+  ))}
+{provided.placeholder}
+  </div>
         )}
       </Droppable>
     </DragDropContext>
