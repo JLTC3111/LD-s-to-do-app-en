@@ -16,29 +16,79 @@ export function TodoCard(props) {
   const cardRef = useRef(null);
 
   useEffect(() => {
-    if (cardRef.current) {
-      gsap.fromTo(
-        cardRef.current,
+    if (!cardRef.current) return;
+    
+    const card = cardRef.current;
+    let ctx = gsap.context(() => {
+      // Initial animation (entering from left)
+      gsap.fromTo(card,
         { 
           opacity: 0, 
-          y: 40,
+          x: -400,
           scale: 0.95 
         },
         {
           opacity: 1,
-          y: 0,
+          x: 0,
           scale: 1,
           duration: 0.6,
           ease: "back.out(1.2)",
           scrollTrigger: {
-            trigger: cardRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none"
+            trigger: card,
+            start: "top 97.5%",
+            end: "bottom 0.5%",
+            toggleActions: "play none reverse none",
+            onEnter: () => {
+              // When scrolling down into view
+              gsap.to(card, {
+                opacity: 1,
+                x: 0,
+                scale: 1,
+                duration: 0.6,
+                ease: "back.out(1.2)",
+                clearProps: "all"
+              });
+            },
+            onLeave: () => {
+              // When scrolling down past the card
+              if (window.scrollY > card.offsetTop) {
+                gsap.to(card, {
+                  opacity: 0,
+                  x: -400,
+                  scale: 0.95,
+                  duration: 0.6,
+                  ease: "back.in(1.2)"
+                });
+              }
+            },
+            onEnterBack: () => {
+              // When scrolling up into view
+              gsap.to(card, {
+                opacity: 1,
+                x: 0,
+                scale: 1,
+                duration: 0.6,
+                ease: "back.out(1.2)",
+                clearProps: "all"
+              });
+            },
+            onLeaveBack: () => {
+              // When scrolling up past the card
+              gsap.to(card, {
+                opacity: 0,
+                x: 400,
+                scale: 0.95,
+                duration: 0.6,
+                ease: "back.in(1.2)"
+              });
+            }
           },
-          delay: Math.min(0.1 * todoId, 0.5) // Staggered delay up to 0.5s
+          delay: Math.min(0.1 * todoId, 0.25)
         }
       );
-    }
+    }, card);
+
+    return () => ctx.revert(); // Cleanup
   }, [todoId]);
 
   function saveEdit() {
@@ -67,7 +117,7 @@ export function TodoCard(props) {
     gsap.to(cardRef.current, {
       opacity: 0,
       y: 40,
-      duration: .5,
+      duration: 0.5,
       ease: "power2.inout",
       onComplete: () => handleDeleteTodo(todoId),
     });
@@ -75,7 +125,7 @@ export function TodoCard(props) {
 
   function handleComplete() {
     gsap.to(cardRef.current, {
-      x: 100,
+      y: 100,
       opacity: 0,
       duration: 0.5,
       ease: "power2.out",

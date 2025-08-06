@@ -12,7 +12,6 @@ export function Tabs(props) {
         { key: 'Incomplete', label: t('tabs.incomplete') },
         { key: 'Completed', label: t('tabs.completed') }
     ]
-    
 
     return (
         <nav className="tab-container">
@@ -23,9 +22,8 @@ export function Tabs(props) {
                     tab.key === 'Incomplete' ?
                             todos.filter(val => !val.complete).length : 
                             todos.filter(val => val.complete).length
-
                     return (
-                                            <button onClick={() => {
+                    <button onClick={() => {
                         if (tab.key !== selectedTab) {
                             playSound('tabSwitch');
                         }
