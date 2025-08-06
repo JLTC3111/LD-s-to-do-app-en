@@ -6,12 +6,13 @@ import { Footer } from "./components/Footer"
 import { AmbientSounds } from "./components/AmbientSounds"
 import { useState, useEffect } from 'react' 
 import { ToastContainer, toast } from 'react-toastify';
-import gsap from "gsap";  
 import { useRef } from 'react';
 import Splashcursor from "./components/Splashcursor"
 import { useTranslation } from 'react-i18next';
 import 'react-toastify/dist/ReactToastify.css';
 import { SoundProvider, useSoundContext } from './components/SoundProvider';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 function AppContent({ performanceMode, setPerformanceMode }) {
   const { t } = useTranslation();
@@ -46,7 +47,6 @@ function AppContent({ performanceMode, setPerformanceMode }) {
     );
     setTodos(newTodoList);
     handleSaveData(newTodoList);
-
     toast.success(t('notifications.taskDone'), {
       position: "top-center",
       autoClose: 2000,
@@ -56,6 +56,7 @@ function AppContent({ performanceMode, setPerformanceMode }) {
       draggable: true,
       theme: "colored",
     })
+    AOS.refresh();
   }
   
   function handleDeleteTodo(id) {
@@ -64,13 +65,13 @@ function AppContent({ performanceMode, setPerformanceMode }) {
   
     // Avoid overwriting undo with same task
     if (lastDeletedTodo && lastDeletedTodo.id === id) return;
-  
     playSound('panel_expand');
     const newTodoList = todos.filter(todo => todo.id !== id);
     setTodos(newTodoList);
     setLastDeletedTodo(toDelete);
     handleSaveData(newTodoList);
     toast.error(t('notifications.taskDeleted'));
+    AOS.refresh();
   }
   
   function handleEditTodo(id, newText) {
@@ -80,6 +81,7 @@ function AppContent({ performanceMode, setPerformanceMode }) {
     );
     setTodos(newTodoList);
     handleSaveData(newTodoList);
+    AOS.refresh();
   }
 
   function handleSaveData(currTodos) {
@@ -133,6 +135,15 @@ function AppContent({ performanceMode, setPerformanceMode }) {
     if (navigator.userAgent.includes("Headless")) {
       setIsBot(true);
     }
+  }, []);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 600,
+      once: false,
+      mirror: false,
+      easing: 'ease-out-cubic',
+    });
   }, []);
 
   if (isBot) {
